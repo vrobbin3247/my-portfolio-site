@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import git from "/public/static/images/git.png";
+import instagram from "/public/static/images/instagram.png";
+import linkedin from "/public/static/images/linkedin.png";
 const Footer = () => {
   return (
     // <div class="bottom-0 fixed">
@@ -34,17 +36,17 @@ const Footer = () => {
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
         <a href="#">
-          <img src="public/static/images/git.png" class="h-7" />
+          <img src={git} class="h-7" />
         </a>
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
         <a href="#">
-          <img src="public/static/images/linkedin.png" class="h-7" />
+          <img src={linkedin} class="h-7" />
         </a>
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
         <a href="#">
-          <img src="public/static/images/instagram.png" class="h-7" />
+          <img src={instagram} class="h-7" />
         </a>
       </div>
       <div class="h-10 bg-custom_purple_washed text-custom_purple_washed px-[50rem]">

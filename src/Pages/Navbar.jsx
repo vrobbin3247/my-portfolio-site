@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 const Navbar = () => {
   return (
-    <div>
+    <div className="sticky top-0 space-y-0.5">
       {/* Top bar with circles and title */}
-      <nav className="bg-custom_purple_washed flex h-10 items-center space-x-4 fixed w-full z-20 top-0 start-0  ">
+      <nav className="bg-custom_purple_washed flex h-10 items-center space-x-4 w-full z-20  start-0  ">
         {/* Circles */}
         <div className="flex items-center space-x-3 px-2">
           <div className="w-3 h-3 rounded-full bg-custom-red"></div>
@@ -62,17 +62,17 @@ const Navbar = () => {
         </div>
       </nav> */}
 
-      <nav class="fixed top-[42px] flex flex-row space-x-0.5">
-        <div class=" h-8 content-center font-cascadia text-xs font-bold text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
+      <nav class=" flex flex-row space-x-0.5 font-cascadia text-sm font-bold">
+        <div class=" h-8 content-center  text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
           _hello
         </div>
-        <div class="h-8 font-cascadia content-center text-xs font-bold text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
+        <div class="h-8 font-cascadia content-center  text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
           _about_me
         </div>
-        <div class="h-8 font-cascadia content-center text-xs font-bold text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
+        <div class="h-8 font-cascadia content-center  text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
           _skills
         </div>
-        <div class="h-8 font-cascadia content-center text-xs font-bold text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
+        <div class="h-8 font-cascadia content-center  text-white hover:text-custom-yellow flex-none bg-custom_purple_washed px-20">
           _projects
         </div>
         <div class="h-8 bg-custom_purple_washed text-custom_purple_washed px-[50rem]">

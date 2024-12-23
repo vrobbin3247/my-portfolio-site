@@ -34,17 +34,17 @@ const Footer = () => {
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
         <a href="#">
-          <img src="src/assets/icons/git.png" class="h-7" />
+          <img src="src/assets/git.png" class="h-7" />
         </a>
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
         <a href="#">
-          <img src="src/assets/icons/linkedin.png" class="h-7" />
+          <img src="src/assets/linkedin.png" class="h-7" />
         </a>
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
         <a href="#">
-          <img src="src/assets/icons/instagram.png" class="h-7" />
+          <img src="src/assets/instagram.png" class="h-7" />
         </a>
       </div>
       <div class="h-10 bg-custom_purple_washed text-custom_purple_washed px-[50rem]">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Typewriter from "./Typewriter";
+import Typewriter from "../components/Typewriter";
 import { TypeAnimation } from "react-type-animation";
 const Hello = () => {
   return (

@@ -35,7 +35,7 @@ const Footer = () => {
         _get_in_touch
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
-        <a href="#">
+        <a href="https://github.com/vrobbin3247" target="_blank">
           <img src={git} class="h-7" />
         </a>
       </div>
@@ -45,7 +45,7 @@ const Footer = () => {
         </a>
       </div>
       <div class="h-10 font-cascadia content-center text-sm font-bold text-custom-gray hover:text-white flex-none bg-custom_purple_washed px-4">
-        <a href="#">
+        <a href="https://www.instagram.com/me_vaibhavm/" target="_blank">
           <img src={instagram} class="h-7" />
         </a>
       </div>

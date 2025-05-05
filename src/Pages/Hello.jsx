@@ -62,11 +62,11 @@ const Hello = () => {
             <br />
             <span className="text-custom-purple"> AI and Data Science.</span>
             <br />
-            With industry experience in
-            <span className="text-custom-blue">
-              software
-              <br /> development,
-            </span>
+            With industry experience in{" "}
+<span className="text-custom-blue">
+  software
+  <br /> development,
+</span>
             <br />
             I’ve built projects using modern frameworks like
             <br />

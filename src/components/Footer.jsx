@@ -23,14 +23,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="fixed bottom-0 flex flex-row w-full">
-      <div className="h-10 flex items-center font-cascadia text-sm font-bold text-custom-gray hover:text-white bg-custom_purple_washed px-4">
+    <footer className="fixed bottom-0 flex flex-row space-x-0.5 w-full">
+      <div className="h-10 flex items-center justify-center w-40 font-cascadia text-sm font-bold text-custom-gray hover:text-white bg-custom_purple_washed">
         _get_in_touch
       </div>
       
       {/* Social links */}
       {socialLinks.map((link, index) => (
-        <div key={index} className="h-10 flex items-center font-cascadia text-sm font-bold text-custom-gray hover:text-white bg-custom_purple_washed px-2">
+        <div key={index} className="h-10 flex items-center justify-center w-12 font-cascadia text-custom-gray hover:text-white bg-custom_purple_washed">
           <a href={link.href} target="_blank" rel="noopener noreferrer">
             <img src={link.img} alt={link.alt} className="h-6" />
           </a>

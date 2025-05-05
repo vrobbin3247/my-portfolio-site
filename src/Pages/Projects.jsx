@@ -94,7 +94,7 @@ def create_lstm_model(X_train, y_train, X_test, y_test):
           "Personal portfolio website showcasing projects and skills with a responsive design and modern UI/UX.",
         technologies: ["HTML", "CSS", "JavaScript"],
         githubLink: "https://github.com/vrobbin3247/portfolio-site",
-        liveDemo: "",
+        liveDemo: "https://www.uvaan.co.in",
         image: "portfolio-site.jpg",
         codeSnippet: `
 // Terminal typing effect
@@ -205,10 +205,10 @@ const handleDragEnd = (result) => {
           <div className="flex h-[80vh]">
             {/* Project List - Left Side - Static */}
             <div className="w-1/3 border-r border-custom_purple_washed pr-2 overflow-y-auto">
-              <div className="text-custom-gray mb-2 pl-4 py-2 text-sm flex items-center sticky top-0 bg-custom-background z-10">
+              {/* <div className="text-custom-gray mb-2 pl-4 py-2 text-sm flex items-center sticky top-0 bg-custom-background z-10">
                 <span className="transform rotate-90 inline-block mr-2">▶</span>
                 <span>EXPLORER</span>
-              </div>
+              </div> */}
               
               {/* Folders and Projects */}
               {Object.keys(projectCategories).map((folderName) => (

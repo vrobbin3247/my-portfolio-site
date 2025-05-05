@@ -37,6 +37,13 @@ const Footer = () => {
         </div>
       ))}
       
+      {/* Resume download */}
+      <div className="h-10 flex items-center justify-center w-40 font-cascadia text-sm font-bold text-custom-gray hover:text-white bg-custom_purple_washed">
+        <a href="/vaibhav resume.pdf" download="Vaibhav_Mandavkar_Resume.pdf" className="w-full h-full flex items-center justify-center">
+          _download_resume
+        </a>
+      </div>
+      
       {/* Responsive spacer */}
       <div className="h-10 bg-custom_purple_washed flex-grow"></div>
     </footer>

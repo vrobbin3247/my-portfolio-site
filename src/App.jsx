@@ -1,19 +1,4 @@
-// import Navbar from "./Pages/Navbar";
-// import Footer from "./Pages/Footer";
-// import Hello from "./Pages/Hello";
-// import StarrySky from "./components/StarrySky";
-// function App() {
-//   return (
-//     <div className="App">
-//       <Navbar></Navbar>
-//       <Hello></Hello>
-//       <StarrySky />
-//       <Footer></Footer>
-//     </div>
-//   );
-// }
 
-// export default App;
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -29,7 +14,7 @@ function App() {
   return (
     <div className="">
       {/* StarrySky as Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <StarrySky />
       </div>
       {/* Foreground Content */}

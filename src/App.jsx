@@ -1,5 +1,3 @@
-
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Skills from "./Pages/Skills";
@@ -20,7 +18,7 @@ function App() {
       {/* Foreground Content */}
       <div className="z-10 ">
         <Navbar />
-        <Footer />
+        {/* <Footer /> */}
       </div>
       <Routes>
         <Route path="/" element={<Hello />} />
@@ -28,6 +26,10 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/about_me" element={<About_me />} />
       </Routes>
+      <div className="z-10 ">
+        {/* <Navbar /> */}
+        <Footer />
+      </div>
     </div>
   );
 }

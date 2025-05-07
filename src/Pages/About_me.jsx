@@ -1,95 +1,348 @@
-import React from "react";
+import { useState, useEffect, useRef } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { X, Filter, Loader } from "lucide-react";
 
-const about_me = () => {
-  return <div>about_me</div>;
-};
+// Initialize Supabase client using environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-export default about_me;
+export default function CreativePortfolio() {
+  const [media, setMedia] = useState([]);
+  const [filteredMedia, setFilteredMedia] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [allTags, setAllTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [loadedImages, setLoadedImages] = useState({});
+  const masonryRef = useRef(null);
 
-// import React from "react";
-// import ParticlesBackground from "../components/ParticlesBackground";
+  // Fetch media from Supabase
+  useEffect(() => {
+    async function fetchMedia() {
+      try {
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
 
-// const About_me = () => {
-//   return (
-//     <div className="min-h-screen bg-custom_purple_washed text-white p-8">
-//       <ParticlesBackground />
-//       <div className="max-w-4xl mx-auto relative z-10">
-//         <h1 className="font-cascadia text-4xl font-bold mb-8">_about_me</h1>
+        const { data, error } = await supabase
+          .from("media_metadata")
+          .select("*");
 
-//         <div className="grid md:grid-cols-2 gap-8">
-//           {/* Introduction Section */}
-//           <div className="bg-custom_purple bg-opacity-50 p-6 rounded-lg">
-//             <h2 className="font-cascadia text-2xl font-bold mb-4">
-//               _introduction
-//             </h2>
-//             <p className="mb-4">
-//               Hello! I'm Vaibhav Mandavkar, a passionate developer and student
-//               at VIT. I love creating innovative solutions and exploring new
-//               technologies.
-//             </p>
-//             <p>
-//               When I'm not coding, you can find me contributing to open-source
-//               projects, learning new frameworks, or working on personal
-//               projects.
-//             </p>
-//           </div>
+        const shuffledData = shuffleArray(data);
 
-//           {/* Education Section */}
-//           <div className="bg-custom_purple bg-opacity-50 p-6 rounded-lg">
-//             <h2 className="font-cascadia text-2xl font-bold mb-4">
-//               _education
-//             </h2>
-//             <div className="mb-4">
-//               <h3 className="font-bold">
-//                 Vellore Institute of Technology, Bhopal
-//               </h3>
-//               <p className="text-sm text-gray-300">
-//                 M.Tech in Computer Science
-//               </p>
-//               <p className="text-sm text-gray-300">2024 - 2026</p>
-//             </div>
-//           </div>
+        if (error) {
+          throw error;
+        }
 
-//           {/* Skills Section */}
-//           <div className="bg-custom_purple bg-opacity-50 p-6 rounded-lg md:col-span-2">
-//             <h2 className="font-cascadia text-2xl font-bold mb-4">_skills</h2>
-//             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-//               {[
-//                 "JavaScript",
-//                 "React",
-//                 "Node.js",
-//                 "Python",
-//                 "HTML/CSS",
-//                 "Tailwind CSS",
-//                 "Git",
-//                 "MongoDB",
-//               ].map((skill) => (
-//                 <div
-//                   key={skill}
-//                   className="bg-custom_purple_washed p-3 rounded text-center"
-//                 >
-//                   {skill}
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
+        setMedia(data);
+        setFilteredMedia(data);
 
-//           {/* Interests Section */}
-//           <div className="bg-custom_purple bg-opacity-50 p-6 rounded-lg md:col-span-2">
-//             <h2 className="font-cascadia text-2xl font-bold mb-4">
-//               _interests
-//             </h2>
-//             <p>
-//               Beyond coding, I'm interested in UI/UX design, open-source
-//               contributions, and participating in hackathons. I also enjoy
-//               reading tech blogs and staying updated with the latest industry
-//               trends.
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+        // Extract all unique tags
+        const uniqueTags = Array.from(
+          new Set(data.flatMap((item) => item.tags || []))
+        ).sort();
 
-// export default About_me;
+        setAllTags(uniqueTags);
+      } catch (error) {
+        console.error("Error fetching media:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchMedia();
+  }, []);
+
+  // Filter media by selected tags
+  useEffect(() => {
+    if (selectedTags.length === 0) {
+      setFilteredMedia(media);
+    } else {
+      const filtered = media.filter((item) =>
+        selectedTags.some((tag) => item.tags && item.tags.includes(tag))
+      );
+      setFilteredMedia(filtered);
+    }
+
+    // Reset loaded images state when filters change
+    setLoadedImages({});
+  }, [selectedTags, media]);
+
+  // Handle image load events to improve masonry layout
+  const handleImageLoaded = (id) => {
+    setLoadedImages((prev) => ({
+      ...prev,
+      [id]: true,
+    }));
+  };
+
+  const toggleTag = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
+
+  const clearFilters = () => {
+    setSelectedTags([]);
+  };
+
+  // Determine media type to render appropriate element
+  const renderMediaItem = (item) => {
+    const fileExt = item.file_url.split(".").pop().toLowerCase();
+
+    if (["jpg", "jpeg", "png", "webp"].includes(fileExt)) {
+      return (
+        <img
+          src={item.file_url}
+          alt={item.caption || item.file_name}
+          className="w-full rounded-md"
+          loading="lazy"
+          onLoad={() => handleImageLoaded(item.id)}
+        />
+      );
+    } else if (["mp4", "webm", "mov"].includes(fileExt)) {
+      return (
+        <video
+          src={item.file_url}
+          className="w-full rounded-md"
+          muted
+          loop
+          playsInline
+          controls={false}
+          onMouseOver={(e) => e.target.play()}
+          onMouseOut={(e) => e.target.pause()}
+          onClick={(e) => {
+            if (e.target.paused) {
+              e.target.play();
+            } else {
+              e.target.pause();
+            }
+          }}
+        />
+      );
+    } else if (["gif"].includes(fileExt)) {
+      return (
+        <img
+          src={item.file_url}
+          alt={item.caption || item.file_name}
+          className="w-full rounded-md"
+          loading="lazy"
+        />
+      );
+    }
+
+    // Fallback
+    return (
+      <div className="w-full aspect-square flex items-center justify-center bg-custom_purple_washed rounded-md">
+        <p className="text-custom-gray p-4 text-center font-cascadia">
+          {item.file_name}
+        </p>
+      </div>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-custom-background text-white p-8 flex flex-col items-center justify-center gap-4">
+        <Loader className="w-8 h-8 text-custom-yellow animate-spin" />
+        <p className="text-xl font-cascadia">
+          Loading your creative portfolio...
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-[calc(100vh-100px)] bg-custom-background text-white p-4 md:p-8 font-cascadia pb-20">
+      <div className=" p-6 mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 font-cascadia">
+            My Creative Journey
+          </h1>
+          <p className="text-custom-gray text-lg font-cascadia">
+            A showcase of my design work, 3D models, photography and creative
+            projects outside of coding.
+          </p>
+        </div>
+
+        {/* Filter Section */}
+        <div className="mb-6 relative">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold font-cascadia">
+              Projects & Creations
+            </h2>
+            <button
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className="flex items-center gap-2 px-4 py-2 bg-custom_purple_washed rounded-md hover:bg-opacity-80 transition"
+            >
+              <Filter size={18} />
+              <span>Filter</span>
+            </button>
+          </div>
+
+          {isFilterOpen && (
+            <div className="bg-custom_purple_washed p-4 rounded-md mb-4 animate-fade-in">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-medium font-cascadia">Filter by tags</h3>
+                {selectedTags.length > 0 && (
+                  <button
+                    onClick={clearFilters}
+                    className="text-custom-red text-sm hover:underline flex items-center gap-1"
+                  >
+                    <X size={14} /> Clear all
+                  </button>
+                )}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {allTags.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      selectedTags.includes(tag)
+                        ? "bg-custom-yellow text-custom-background"
+                        : "bg-custom-background text-custom-gray hover:bg-opacity-80"
+                    } transition`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Media Grid - Masonry Layout */}
+        {filteredMedia.length === 0 ? (
+          <div className="text-center py-16 text-custom-gray">
+            <p className="font-cascadia">
+              No items match your selected filters. Try a different combination.
+            </p>
+          </div>
+        ) : (
+          <div
+            ref={masonryRef}
+            className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 pb-8"
+            style={{ columnFill: "balance" }}
+          >
+            {filteredMedia.map((item) => (
+              <div
+                key={item.id}
+                className="group relative overflow-hidden rounded-md break-inside-avoid mb-4 transform hover:scale-[1.01] transition-transform duration-200"
+              >
+                {/* Media Content - Preserves Aspect Ratio */}
+                <div className="w-full relative">
+                  {!loadedImages[item.id] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-custom_purple_washed/30 rounded-md">
+                      <div className="w-6 h-6 border-2 border-custom-yellow border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                  {renderMediaItem(item)}
+                </div>
+
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                  {item.caption && (
+                    <p className="text-white font-medium mb-2 font-cascadia">
+                      {item.caption}
+                    </p>
+                  )}
+
+                  {item.tags && item.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={`${item.id}-${tag}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleTag(tag);
+                          }}
+                          className="text-xs bg-custom-background/80 text-custom-yellow px-2 py-1 rounded-full cursor-pointer hover:bg-custom-background transition"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Project Descriptions Section */}
+        <div className="mt-16 space-y-8 bg-custom_purple_washed p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-6 border-b border-custom-gray/30 pb-2 font-cascadia">
+            Featured Projects
+          </h2>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-semibold text-custom-yellow font-cascadia">
+                Enamel Pin Brand - Uvaan
+              </h3>
+              <p className="mt-2 text-custom-gray">
+                Designed Shivaji Maharaj's Rajmudra as an enamel pin, from
+                initial concept in Illustrator to 3D modeling in Blender for
+                material selection. Created complete packaging, mockups, and
+                promotional materials using Blender, Photoshop and Lightroom.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-custom-green font-cascadia">
+                Poster Store
+              </h3>
+              <p className="mt-2 text-custom-gray font-cascadia">
+                Curated and processed vintage and modern posters spanning anime,
+                movies (Hindi/English), superhero content, sitcoms, and F1.
+                Created batch mockups in Photoshop and built a Shopify
+                storefront with promotional materials rendered in Blender.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-custom-blue font-cascadia">
+                Blender Creations
+              </h3>
+              <p className="mt-2 text-custom-gray font-cascadia">
+                Designed various 3D scenes, sticker mockups, and short
+                promotional videos for personal projects and family. Developed
+                realistic product mockups for visual merchandising.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-custom-purple font-cascadia">
+                Apparel Design
+              </h3>
+              <p className="mt-2 text-custom-gray font-cascadia">
+                Created original T-shirt designs in Illustrator and produced
+                photorealistic mockups to visualize the final products.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-custom-red">
+                Astrophotography
+              </h3>
+              <p className="mt-2 text-custom-gray">
+                Captured astronomical phenomena including the Milky Way galaxy
+                and Geminid meteor shower. Also passionate about landscape
+                photography to document natural beauty.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

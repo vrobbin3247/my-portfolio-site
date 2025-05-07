@@ -42,7 +42,7 @@ const Navbar = () => {
             {item.label}
           </NavLink>
         ))}
-        
+
         {/* Responsive spacer that fills remaining width */}
         <div className="h-8 bg-custom_purple_washed flex-grow"></div>
       </nav>

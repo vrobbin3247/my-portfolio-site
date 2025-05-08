@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { X, Filter, Loader } from "lucide-react";
+import { X, Filter, Loader, ZoomIn, ZoomOut, Move } from "lucide-react";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 // Initialize Supabase client using environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -15,7 +17,32 @@ export default function CreativePortfolio() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [loadedImages, setLoadedImages] = useState({});
+  const [previewItem, setPreviewItem] = useState(null);
+  const [relatedMedia, setRelatedMedia] = useState([]);
   const masonryRef = useRef(null);
+
+  const openPreview = (item) => {
+    setPreviewItem(item);
+    // Find related media with enhanced matching
+    const related = media
+      .filter((m) => m.id !== item.id)
+      .map((m) => {
+        const matchingTags = m.tags?.filter((tag) => item.tags?.includes(tag));
+        return {
+          ...m,
+          matchScore: matchingTags ? matchingTags.length : 0,
+        };
+      })
+      .filter((m) => m.matchScore >= 2)
+      .sort((a, b) => b.matchScore - a.matchScore)
+      .slice(0, 8);
+    setRelatedMedia(related);
+  };
+
+  const closePreview = () => {
+    setPreviewItem(null);
+    setRelatedMedia([]);
+  };
 
   // Fetch media from Supabase
   useEffect(() => {
@@ -94,7 +121,7 @@ export default function CreativePortfolio() {
   };
 
   // Determine media type to render appropriate element
-  const renderMediaItem = (item) => {
+  const renderMediaItem = (item, isPreview = false) => {
     const fileExt = item.file_url.split(".").pop().toLowerCase();
 
     if (["jpg", "jpeg", "png", "webp"].includes(fileExt)) {
@@ -115,16 +142,8 @@ export default function CreativePortfolio() {
           muted
           loop
           playsInline
-          controls={false}
-          onMouseOver={(e) => e.target.play()}
-          onMouseOut={(e) => e.target.pause()}
-          onClick={(e) => {
-            if (e.target.paused) {
-              e.target.play();
-            } else {
-              e.target.pause();
-            }
-          }}
+          controls={isPreview} // Only show controls in preview mode
+          autoPlay={isPreview} // Autoplay in preview mode
         />
       );
     } else if (["gif"].includes(fileExt)) {
@@ -240,12 +259,22 @@ export default function CreativePortfolio() {
               >
                 {/* Media Content - Preserves Aspect Ratio */}
                 <div className="w-full relative">
+                  <div
+                    className="absolute inset-0 z-10 cursor-pointer"
+                    onClick={(e) => {
+                      console.log("Media item clicked", item.id);
+                      openPreview(item);
+                    }}
+                  />
                   {!loadedImages[item.id] && (
                     <div className="absolute inset-0 flex items-center justify-center bg-custom_purple_washed/30 rounded-md">
                       <div className="w-6 h-6 border-2 border-custom-yellow border-t-transparent rounded-full animate-spin"></div>
                     </div>
                   )}
-                  {renderMediaItem(item)}
+                  <div className="relative z-0">{renderMediaItem(item)}</div>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <ZoomIn className="text-white w-8 h-8 bg-black/50 p-1 rounded-full pointer-events-none" />
+                  </div>
                 </div>
 
                 {/* Overlay on hover */}
@@ -343,6 +372,66 @@ export default function CreativePortfolio() {
           </div>
         </div>
       </div>
+
+      {/* Media Preview Modal */}
+      {previewItem && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+          <button
+            onClick={closePreview}
+            className="absolute top-4 right-4 p-2 bg-custom_purple_washed/50 rounded-full hover:bg-custom_purple_washed transition"
+          >
+            <X size={24} />
+          </button>
+
+          <div className="max-w-4xl w-full flex flex-col md:flex-row gap-6">
+            <div className="flex-1">
+              <Zoom zoomMargin={40}>{renderMediaItem(previewItem, true)}</Zoom>
+              <div className="mt-4">
+                <h3 className="text-xl font-semibold">
+                  {previewItem.caption || previewItem.file_name}
+                </h3>
+                {previewItem.tags && previewItem.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {previewItem.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-sm bg-custom_purple_washed/50 text-custom-yellow px-2 py-1 rounded-full"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {relatedMedia.length > 0 && (
+              <div className="w-full md:w-64 flex-shrink-0">
+                <h4 className="text-lg font-semibold mb-4">Related Media</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {relatedMedia.map((item) => (
+                    <div
+                      key={item.id}
+                      className="cursor-pointer hover:opacity-80 transition relative group"
+                      onClick={() => openPreview(item)}
+                    >
+                      {renderMediaItem(item)}
+                      {/* {previewItem?.tags?.length > 0 && (
+                        <div className="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-1 rounded">
+                          {Math.round(
+                            (item.matchScore / previewItem.tags.length) * 100
+                          )}
+                          % match
+                        </div>
+                      )} */}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

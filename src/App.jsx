@@ -12,9 +12,9 @@ function App() {
   return (
     <div className="">
       {/* StarrySky as Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* <div className="absolute inset-0 z-0 pointer-events-none">
         <StarrySky />
-      </div>
+      </div> */}
       {/* Foreground Content */}
       <div className="z-10 ">
         <Navbar />

@@ -21,11 +21,16 @@ const Projects = () => {
         id: 1,
         title: "Devanagari Character Classifier",
         technologies: ["Python", "TensorFlow", "Streamlit"],
+        live: "https://devanagari-character-classifier.streamlit.app/",
+        git_repo:
+          "https://github.com/vrobbin3247/devnagari-character-classifier",
       },
       {
         id: 2,
         title: "Custom YOLO Model",
         technologies: ["Python", "YOLOv8", "Jupyter Notebook"],
+        live: "",
+        git_repo: "https://github.com/vrobbin3247/Custom-YOLO-model",
       },
     ],
     "data-analysis": [
@@ -33,6 +38,8 @@ const Projects = () => {
         id: 3,
         title: "India CPI Analysis",
         technologies: ["Python", "Streamlit", "LSTM", "Pandas"],
+        live: "https://india-cpi-analysis-2013-25.streamlit.app/",
+        git_repo: "https://github.com/vrobbin3247/india-CPI-analysis",
       },
     ],
     "web-dev": [
@@ -40,6 +47,8 @@ const Projects = () => {
         id: 4,
         title: "Portfolio Site",
         technologies: ["React", "Tailwind", "Vite", "vercel"],
+        live: "https://uvaan.co.in",
+        git_repo: "https://github.com/vrobbin3247/my-portfolio-site",
       },
       {
         id: 5,
@@ -51,6 +60,15 @@ const Projects = () => {
           "Tailwind CSS",
           "Spotify API",
         ],
+        live: "",
+        git_repo: "https://github.com/vrobbin3247/spotify-playlist-organiser",
+      },
+      {
+        id: 6,
+        title: "Spotify Poster Maker",
+        technologies: ["Python"],
+        live: "https://spotify-poster-maker.streamlit.app/",
+        git_repo: "https://github.com/vrobbin3247/Spotify-Poster-Maker",
       },
     ],
   };
@@ -152,7 +170,33 @@ const Projects = () => {
                               <FaReact className="text-cyan-500" />
                             )}
                           </span>
-                          <span>{project.title}</span>
+                          <div className="flex items-center gap-4 text-white">
+                            <span className="font-bold">{project.title}</span>
+
+                            {project.live ? (
+                              <a
+                                href={project.live}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-custom-blue hover:underline"
+                              >
+                                Try
+                              </a>
+                            ) : (
+                              <span className="text-gray-500 cursor-not-allowed">
+                                Try
+                              </span>
+                            )}
+
+                            <a
+                              href={project.git_repo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-custom-green hover:underline"
+                            >
+                              Code
+                            </a>
+                          </div>
                         </div>
                       ))}
                     </div>

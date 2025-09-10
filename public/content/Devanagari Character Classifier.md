@@ -1,7 +1,7 @@
 # Devanagari Handwritten Character Recognition using CNN
 
 In a world increasingly driven by digital convenience, the ability to effortlessly bridge the gap between handwritten text and digital information is more crucial than ever. While systems for Latin script recognition are ubiquitous, the rich and complex Devanagari script, used for languages like Hindi, Marathi, and Nepali, presents its own unique challenges and opportunities. Today, we’re diving into an exciting project that tackles this head-on: a Streamlit-powered web application that accurately recognizes handwritten Devanagari characters using the power of Convolutional Neural Networks (CNNs).
-![Inference Workflow](public/content/output.gif)
+![Inference Workflow](gifs/output.gif)
 
 ## The Challenge of Devanagari
 

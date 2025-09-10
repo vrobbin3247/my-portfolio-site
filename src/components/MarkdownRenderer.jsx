@@ -1,5 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw"; // ✅ parse raw HTML in Markdown
+import remarkGfm from "remark-gfm"; // ✅ optional, for tables, etc.
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -7,6 +9,8 @@ const MarkdownRenderer = ({ content }) => {
   return (
     <div className="prose prose-invert max-w-none">
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]} // ✅ allow HTML like <div> and <img>
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
@@ -40,6 +44,16 @@ const MarkdownRenderer = ({ content }) => {
                 {children}
               </code>
             );
+          },
+
+          img({ node, ...props }) {
+            return (
+              <img {...props} className="rounded shadow-md" alt={props.alt} />
+            );
+          },
+
+          p({ node, ...props }) {
+            return <p {...props} className="my-4 text-gray-300" />;
           },
         }}
       >

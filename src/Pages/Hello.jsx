@@ -3,31 +3,6 @@ import Typewriter from "../components/Typewriter";
 import { TypeAnimation } from "react-type-animation";
 const Hello = () => {
   return (
-    // <div>
-    //   <div class="fixed top-[250px] right-[307px] text-9xl font-cascadia text-custom-green">
-    //     &lt;Vaibhav
-    //   </div>
-    //   <div class="fixed top-[360px] right-40 text-9xl font-cascadia text-custom-green">
-    //     Mandavkar&gt;
-    //   </div>
-    //   <div class="fixed top-[480px] right-[200px] text-5xl font-cascadia text-white">
-    //     //I AM PASSIONATE ABOUT
-    //   </div>
-    //   <div class="fixed top-[530px] left-[200px] text-6xl font-bold font-cascadia text-custom-purple">
-    //     <TypeAnimation
-    //       sequence={[
-    //         "Data Science",
-    //         500,
-    //         "Artificial Intelligence",
-    //         500,
-    //         "Machine Learning",
-    //         500,
-    //       ]}
-    //       speed={{ type: "keyStrokeDelayInMs", value: 250 }}
-    //       repeat={Infinity}
-    //     />
-    //   </div>
-    // </div>
     <div className="grid grid-cols-2">
       <div class="grid grid-cols-8 pl-9 font-cascadia text-lg">
         <div class="py-[116px] pl-10 text-custom-gray ">
@@ -63,10 +38,10 @@ const Hello = () => {
             <span className="text-custom-purple"> AI and Data Science.</span>
             <br />
             With industry experience in{" "}
-<span className="text-custom-blue">
-  software
-  <br /> development,
-</span>
+            <span className="text-custom-blue">
+              software
+              <br /> development,
+            </span>
             <br />
             I’ve built projects using modern frameworks like
             <br />
@@ -105,6 +80,8 @@ const Hello = () => {
                 "Machine Learning",
                 500,
                 "Data Visualization",
+                500,
+                "Generative AI",
                 500,
               ]}
               speed={{ type: "keyStrokeDelayInMs", value: 250 }}

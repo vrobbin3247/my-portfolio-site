@@ -171,9 +171,7 @@ export default function CreativePortfolio() {
     return (
       <div className="min-h-screen bg-custom-background text-white p-8 flex flex-col items-center justify-center gap-4">
         <Loader className="w-8 h-8 text-custom-yellow animate-spin" />
-        <p className="text-xl font-cascadia">
-          Loading your creative portfolio...
-        </p>
+        <p className="text-xl font-cascadia">Loading creative portfolio...</p>
       </div>
     );
   }

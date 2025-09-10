@@ -90,7 +90,7 @@ const Projects = () => {
     }
 
     const fileName = getMarkdownFileName(project.title);
-    const filePath = `public/content/${fileName}`;
+    const filePath = `/content/${fileName}`;
 
     setLoading(true);
     setError(null);

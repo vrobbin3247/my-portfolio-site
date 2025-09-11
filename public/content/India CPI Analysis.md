@@ -18,22 +18,43 @@ This Streamlit-based dashboard provides comprehensive analysis of India's Consum
 
 ### Data Pipeline and Processing
 
-The application processes over 92,000+ CPI data points across multiple dimensions:
+#### 1. Getting credentials from MOSPI API
 
-```python
-@st.cache_data
-def load_data():
-    df = pd.read_csv(DATA_URL)
+```
+POST: https://api.mospi.gov.in/api/users/login
+Body:
+{
+"username": "any_username",
+"password": "password",
+"organization": "your_organisation",
+"purpose": "your_purpose",
+"gender": "Male/Female"
+}
+Successful Response:
+"msg": "Login successful",
+    "statusCode": true,
+    "response": {
+        "username": "selected_username",
+        "gender": "selected_gender",
+        "role": "users",
+        "createdAt": "Date",
+        "token": "GENERATED_TOKEN"
+    }
+```
 
-    # Convert Month names to numbers for proper chronological sorting
-    df['month'] = df['month'].str.strip()
-    df['month'] = pd.to_datetime(df['month'], format='%B', errors='coerce').dt.month
+#### 2. Getting data
 
-    # Create unified Date index
-    df['Date'] = pd.to_datetime(df[['year', 'month']].assign(day=1))
-    df.set_index('Date', inplace=True)
-
-    return df.sort_index()
+```
+GET: https://api.mospi.gov.in/api/cpi/getCPIIndex
+///add Auth token in Authorization
+Body:
+{
+"username": "any_username",
+"password": "password",
+"organization": "your_organisation",
+"purpose": "your_purpose",
+"gender": "Male/Female"
+}
 ```
 
 **Data Structure:**
@@ -118,7 +139,7 @@ def show_map(sector, latest_cpi):
 
 The application implements Long Short-Term Memory networks for predicting future CPI trends:
 
-<img src="gifs/filtering.gif" width="80%" alt="Filtering GIF" />
+<img src="gifs/forecasting.gif" width="80%" alt="Filtering GIF" />
 
 ```python
 def predict_future(model, data, scaler, window_size=12, steps=12):

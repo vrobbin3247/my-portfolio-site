@@ -32,6 +32,20 @@ const Projects = () => {
         live: "",
         git_repo: "https://github.com/vrobbin3247/Custom-YOLO-model",
       },
+      {
+        id: 7,
+        title: "Anime Sketch Colorization with U-Net",
+        technologies: [
+          "Python",
+          "PyTorch",
+          "Jupyter Notebook",
+          "UNet",
+          "Streamlit",
+        ],
+        live: "https://uan-based-anime-style-image-colorizer.streamlit.app/",
+        git_repo:
+          "https://github.com/vrobbin3247/UAN-based-anime-style-image-coloriser",
+      },
     ],
     "data-analysis": [
       {

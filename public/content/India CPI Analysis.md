@@ -20,7 +20,7 @@ This Streamlit-based dashboard provides comprehensive analysis of India's Consum
 
 #### 1. Getting credentials from MOSPI API
 
-```
+```json
 POST: https://api.mospi.gov.in/api/users/login
 Body:
 {
@@ -44,7 +44,7 @@ Successful Response:
 
 #### 2. Getting data
 
-```
+```json
 GET: https://api.mospi.gov.in/api/cpi/getCPIIndex
 ///add Auth token in Authorization
 Body:

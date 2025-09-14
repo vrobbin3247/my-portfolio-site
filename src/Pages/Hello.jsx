@@ -8,47 +8,53 @@ const Hello = () => {
       {/* Mobile Layout */}
       <div className="block md:hidden">
         {/* Mobile Content - No separate header since navbar handles it */}
-        <div className="px-4 pt-8 pb-8 space-y-8">
+        <div
+          className="px-4 pt-2 pb-4
+         space-y-8"
+        >
           {/* Hero Section - Image and Name side by side */}
-          <div className="flex items-center space-x-4">
-            {/* Profile Image */}
-            <div className="w-24 h-28 bg-custom-purple-washed rounded-3xl overflow-hidden border-2 border-custom-gray flex-shrink-0">
-              <img src="public/static/images/profile.png"></img>
-              <div className="w-full h-full bg-gradient-to-br from-custom-gray to-custom-purple-washed flex items-center justify-center">
-                <div className="w-20 h-24 bg-gradient-to-br from-custom-purple-washed to-custom-purple rounded-2xl"></div>
-              </div>
-            </div>
-
-            {/* Name and Passion Section */}
-            <div className="flex-1 space-y-3 pt-2">
-              <div className="text-custom-green font-cascadia text-4xl leading-tight font-normal">
-                &lt;Vaibhav
-                <br />
-                Mandavkar&gt;
+          <div className="flex justify-center">
+            <div className="flex items-center space-x-4">
+              {/* Profile Image */}
+              <div className="w-24 h-28 bg-custom-purple-washed rounded-3xl overflow-hidden border-2 border-custom-gray flex-shrink-0">
+                <img
+                  src="/static/images/profile.png"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              {/* Passion Text */}
-              <div className="space-y-1">
-                <div className="text-custom-text font-cascadia text-sm">
-                  //I AM PASSIONATE ABOUT
+              {/* Name and Passion Section */}
+              <div className="flex-1 space-y-0.5 pt-2">
+                <div className="text-custom-green font-cascadia text-4xl leading-8 font-normal">
+                  &lt;Vaibhav
+                  <br />
+                  Mandavkar&gt;
                 </div>
-                <div className="text-custom-purple font-cascadia font-bold text-2xl">
-                  <TypeAnimation
-                    sequence={[
-                      "DATA ANALYSIS",
-                      1000,
-                      "ARTIFICIAL INTELLIGENCE",
-                      1000,
-                      "MACHINE LEARNING",
-                      1000,
-                      "DATA VISUALIZATION",
-                      1000,
-                      "GENERATIVE AI",
-                      1000,
-                    ]}
-                    speed={{ type: "keyStrokeDelayInMs", value: 100 }}
-                    repeat={Infinity}
-                  />
+
+                {/* Passion Text */}
+                <div className="">
+                  <div className="text-custom-text font-cascadia text-sm">
+                    //I AM PASSIONATE ABOUT
+                  </div>
+                  <div className="text-custom-purple font-cascadia font-bold text-xl">
+                    <TypeAnimation
+                      sequence={[
+                        "DATA ANALYSIS",
+                        1000,
+                        "ARTIFICIAL INTELLIGENCE",
+                        1000,
+                        "MACHINE LEARNING",
+                        1000,
+                        "DATA VISUALIZATION",
+                        1000,
+                        "GENERATIVE AI",
+                        1000,
+                      ]}
+                      speed={{ type: "keyStrokeDelayInMs", value: 100 }}
+                      repeat={Infinity}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

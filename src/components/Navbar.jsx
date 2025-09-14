@@ -95,7 +95,7 @@ const Navbar = () => {
               )}
             </button>
 
-            <span className="font-cascadia text-custom-gray text-sm font-semibold">
+            <span className="font-cascadia text-custom-gray text-xs font-semibold">
               Vaibhav_Mandavkar
             </span>
           </div>

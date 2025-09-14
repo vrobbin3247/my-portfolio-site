@@ -91,7 +91,11 @@ const Navbar = () => {
               {isMobileMenuOpen ? (
                 <FaTimes className="h-6 w-6 text-custom-text" />
               ) : (
-                <FaBars className="h-6 w-6 text-custom-text" />
+                <div className="flex flex-col space-y-1">
+                  <div className="w-6 h-1 bg-custom-red"></div>
+                  <div className="w-6 h-1 bg-custom-yellow"></div>
+                  <div className="w-6 h-1 bg-custom-green"></div>
+                </div>
               )}
             </button>
 

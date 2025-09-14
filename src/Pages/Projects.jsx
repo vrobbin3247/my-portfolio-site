@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FaPython, FaReact } from "react-icons/fa";
-import ReactMarkdown from "react-markdown";
+import {
+  FaPython,
+  FaReact,
+  FaArrowLeft,
+  FaPlus,
+  FaMinus,
+} from "react-icons/fa";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isMobileDetailView, setIsMobileDetailView] = useState(false);
   const [expandedFolders, setExpandedFolders] = useState({
     "ai-ml": true,
     "web-dev": true,
@@ -107,6 +113,12 @@ const Projects = () => {
 
   // Fetch markdown when selectedProject changes
   useEffect(() => {
+    if (selectedProject) {
+      setIsMobileDetailView(true);
+    }
+  }, [selectedProject]);
+
+  useEffect(() => {
     if (!selectedProject) {
       setMarkdownContent("");
       return;
@@ -148,17 +160,22 @@ const Projects = () => {
     <div className="min-h-screen py-6 bg-custom-background font-cascadia">
       <div className="px-4 sm:px-4 lg:px-4 mx-auto">
         <div className="mb-8">
-          <div className="flex h-[80vh]">
-            {/* Left Navigation */}
-            <div className="w-1/3 border-r border-custom_purple_washed pr-2 overflow-y-auto">
+          <div className="md:flex h-[80vh]">
+            {/* Left Navigation (Master View) */}
+            <div
+              className={`
+                ${isMobileDetailView ? "hidden" : "block"} 
+                md:block md:w-1/3 md:border-r md:border-custom_purple_washed pr-2 overflow-y-auto
+              `}
+            >
               {Object.keys(projectCategories).map((folderName) => (
                 <div key={folderName} className="mb-2">
                   <div
-                    className="text-custom-gray pl-4 py-2 text-sm flex items-center cursor-pointer hover:bg-custom_purple_washed"
+                    className="text-custom-gray pl-4 py-2 text-base flex items-center cursor-pointer hover:bg-custom_purple_washed"
                     onClick={() => toggleFolder(folderName)}
                   >
                     <span className="transform inline-block mr-2">
-                      {expandedFolders[folderName] ? "▼" : "►"}
+                      {expandedFolders[folderName] ? <FaMinus /> : <FaPlus />}
                     </span>
                     <span className="mr-2">{folderTypes[folderName].icon}</span>
                     <span>{folderTypes[folderName].name}</span>
@@ -219,8 +236,24 @@ const Projects = () => {
               ))}
             </div>
 
-            {/* Right Content Area */}
-            <div className="w-2/3 pl-4 overflow-y-auto text-custom-text">
+            {/* Right Content Area (Detail View) */}
+            <div
+              className={`
+                ${isMobileDetailView ? "block" : "hidden"} 
+                md:block md:w-2/3 pl-4 overflow-y-auto text-custom-text
+              `}
+            >
+              {/* Mobile Back Button */}
+              <div className="md:hidden mb-4">
+                <button
+                  onClick={() => setIsMobileDetailView(false)}
+                  className="flex items-center text-custom-gray hover:text-custom-text"
+                >
+                  <FaArrowLeft className="mr-2" />
+                  <span>Back to Projects</span>
+                </button>
+              </div>
+
               {selectedProject ? (
                 <div>
                   {(() => {
@@ -233,9 +266,6 @@ const Projects = () => {
                     return (
                       <div className="mb-6">
                         <div className="sticky top-0 bg-custom-background pt-2 pb-4 z-10">
-                          {/* <h3 className="text-custom-purple text-xl font-bold mb-4">
-                            {project.title}
-                          </h3> */}
                           {loading ? (
                             <p>Loading markdown...</p>
                           ) : error ? (
@@ -253,7 +283,7 @@ const Projects = () => {
                   })()}
                 </div>
               ) : (
-                <div className="h-full flex items-center justify-center text-custom-gray">
+                <div className="h-full hidden md:flex items-center justify-center text-custom-gray">
                   <div className="text-center">
                     <p className="text-xl mb-2">
                       // Select a project from the explorer

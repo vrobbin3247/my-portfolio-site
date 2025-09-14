@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import ThemeSwitcher from "./ThemeSwitcher";
 import git from "/public/static/images/git.png";
 import instagram from "/public/static/images/instagram.png";
@@ -47,9 +47,9 @@ const Navbar = () => {
               <div className="w-3 h-3 rounded-full bg-custom-yellow"></div>
               <div className="w-3 h-3 rounded-full bg-custom-green"></div>
             </div>
-            <span className="font-cascadia text-custom-gray text-sm font-semibold">
+            <Link to="/" className="font-cascadia text-custom-gray text-sm font-semibold">
               Vaibhav_Mandavkar
-            </span>
+            </Link>
           </div>
           <ThemeSwitcher />
         </nav>
@@ -81,28 +81,28 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <div className="md:hidden">
         {/* Mobile Header */}
-        <nav className="bg-custom-purple-washed flex h-12 items-center justify-between px-4 w-full z-20">
-          <div className="flex items-center space-x-4">
-            {/* Hamburger Menu */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="cursor-pointer"
-            >
-              {isMobileMenuOpen ? (
-                <FaTimes className="h-6 w-6 text-custom-text" />
-              ) : (
-                <div className="flex flex-col space-y-1">
-                  <div className="w-6 h-1 bg-custom-red"></div>
-                  <div className="w-6 h-1 bg-custom-yellow"></div>
-                  <div className="w-6 h-1 bg-custom-green"></div>
-                </div>
-              )}
-            </button>
+        <nav className="flex h-12 items-center justify-between px-3 w-full z-20">
+          {/* Hamburger Menu */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="cursor-pointer"
+          >
+            {isMobileMenuOpen ? (
+              <FaTimes className="h-6 w-6 text-custom-text" />
+            ) : (
+              <div className="flex flex-col space-y-1">
+                <div className="w-6 h-1 bg-custom-red"></div>
+                <div className="w-6 h-1 bg-custom-yellow"></div>
+                <div className="w-6 h-1 bg-custom-green"></div>
+              </div>
+            )}
+          </button>
 
-            <span className="font-cascadia text-custom-gray text-xs font-semibold">
-              Vaibhav_Mandavkar
-            </span>
-          </div>
+          <Link to="/" className="font-cascadia text-custom-gray text-s font-semibold">
+            <span className="hidden md:inline">Vaibhav_Mandavkar</span>
+            <span className="md:hidden">VM</span>
+          </Link>
+
           <ThemeSwitcher />
         </nav>
 
@@ -117,11 +117,12 @@ const Navbar = () => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Menu Header */}
-              <div className="bg-custom-purple-washed flex h-16 items-center justify-start px-4 border-b border-custom-purple">
+              {/* <div className="bg-custom-purple-washed flex h-16 items-center justify-start px-4 border-b border-custom-purple">
                 <span className="font-cascadia text-custom-gray text-sm font-semibold">
-                  Vaibhav_Mandavkar
+                  <span className="hidden md:inline">Vaibhav_Mandavkar</span>
+                  <span className="md:hidden">VM</span>
                 </span>
-              </div>
+              </div> */}
 
               <nav className="flex flex-col font-cascadia text-sm font-bold flex-grow">
                 {navItems.map((item) => (

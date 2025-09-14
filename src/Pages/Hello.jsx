@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Typewriter from "../components/Typewriter";
+import React from "react";
+import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 
 const Hello = () => {
@@ -118,12 +118,15 @@ const Hello = () => {
 
           {/* Action Buttons */}
           <div className="flex space-x-4">
-            <button className="flex-1 border border-custom-yellow text-custom-yellow font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-yellow hover:text-custom-background transition-colors">
+            <Link
+              to="/projects"
+              className="flex-1 text-center border border-custom-yellow text-custom-yellow font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-yellow hover:text-custom-background transition-colors"
+            >
               view my projects
-            </button>
-            <button className="flex-1 border border-custom-gray text-custom-text font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-gray hover:text-custom-background transition-colors">
+            </Link>
+            {/* <button className="flex-1 border border-custom-gray text-custom-text font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-gray hover:text-custom-background transition-colors">
               connect with me
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -8,14 +8,14 @@ const Hello = () => {
       {/* Mobile Layout */}
       <div className="block md:hidden">
         {/* Mobile Content - No separate header since navbar handles it */}
-        <div className="px-4 pt-8 pb-24 space-y-8">
+        <div className="px-4 pt-8 pb-8 space-y-8">
           {/* Hero Section - Image and Name side by side */}
-          <div className="flex items-start space-x-4">
+          <div className="flex items-center space-x-4">
             {/* Profile Image */}
-            <div className="w-24 h-28 bg-gray-600 rounded-3xl overflow-hidden border-2 border-gray-400 flex-shrink-0">
-              {/* Profile image placeholder - replace with actual image */}
-              <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-600 flex items-center justify-center">
-                <div className="w-20 h-24 bg-gradient-to-br from-gray-400 to-gray-700 rounded-2xl"></div>
+            <div className="w-24 h-28 bg-custom-purple-washed rounded-3xl overflow-hidden border-2 border-custom-gray flex-shrink-0">
+              <img src="public/static/images/profile.png"></img>
+              <div className="w-full h-full bg-gradient-to-br from-custom-gray to-custom-purple-washed flex items-center justify-center">
+                <div className="w-20 h-24 bg-gradient-to-br from-custom-purple-washed to-custom-purple rounded-2xl"></div>
               </div>
             </div>
 
@@ -29,7 +29,7 @@ const Hello = () => {
 
               {/* Passion Text */}
               <div className="space-y-1">
-                <div className="text-white font-cascadia text-sm">
+                <div className="text-custom-text font-cascadia text-sm">
                   //I AM PASSIONATE ABOUT
                 </div>
                 <div className="text-custom-purple font-cascadia font-bold text-2xl">
@@ -57,11 +57,11 @@ const Hello = () => {
           {/* Code Section */}
           <div className="bg-custom-purple-washed rounded-lg p-4 relative">
             {/* Code content */}
-            <div className="font-cascadia text-xs text-white space-y-1">
+            <div className="font-cascadia text-xs text-custom-text space-y-1">
               <div className="text-custom-yellow">&lt;hello&gt;</div>
               <div>
-                Hello, my name is <span className="text-white">vaibhav()</span>{" "}
-                &#123;
+                Hello, my name is{" "}
+                <span className="text-custom-text">vaibhav()</span> &#123;
               </div>
               <div>I'm a tech enthusiast pursuing a master's in</div>
               <div>
@@ -100,10 +100,10 @@ const Hello = () => {
 
           {/* Action Buttons */}
           <div className="flex space-x-4">
-            <button className="flex-1 border border-custom-yellow text-custom-yellow font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-yellow hover:text-black transition-colors">
+            <button className="flex-1 border border-custom-yellow text-custom-yellow font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-yellow hover:text-custom-background transition-colors">
               view my projects
             </button>
-            <button className="flex-1 border border-gray-400 text-white font-cascadia text-xs py-2 px-4 rounded hover:bg-gray-400 hover:text-black transition-colors">
+            <button className="flex-1 border border-custom-gray text-custom-text font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-gray hover:text-custom-background transition-colors">
               connect with me
             </button>
           </div>

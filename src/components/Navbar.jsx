@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ThemeSwitcher from "./ThemeSwitcher";
+import git from "/public/static/images/git.png";
+import instagram from "/public/static/images/instagram.png";
+import linkedin from "/public/static/images/linkedin.png";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,6 +14,24 @@ const Navbar = () => {
     { path: "/about_me", label: "_about_me" },
     { path: "/skills", label: "_skills" },
     { path: "/projects", label: "_projects" },
+  ];
+
+  const socialLinks = [
+    {
+      href: "https://github.com/vrobbin3247",
+      img: git,
+      alt: "GitHub",
+    },
+    {
+      href: "https://www.linkedin.com/in/vaibhav-mandavkar-691701172/",
+      img: linkedin,
+      alt: "LinkedIn",
+    },
+    {
+      href: "https://www.instagram.com/me_vaibhavm/",
+      img: instagram,
+      alt: "Instagram",
+    },
   ];
 
   return (
@@ -42,7 +64,7 @@ const Navbar = () => {
                 `h-8 flex items-center justify-center w-52 bg-custom-purple-washed ${
                   isActive
                     ? "text-custom-yellow"
-                    : "text-white hover:text-custom-yellow"
+                    : "text-custom-text hover:text-custom-yellow"
                 }`
               }
               end={item.exact}
@@ -64,23 +86,13 @@ const Navbar = () => {
             {/* Hamburger Menu */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex flex-col space-y-1 cursor-pointer p-1"
+              className="cursor-pointer"
             >
-              <div
-                className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-                  isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
-                }`}
-              ></div>
-              <div
-                className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-                  isMobileMenuOpen ? "opacity-0" : ""
-                }`}
-              ></div>
-              <div
-                className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-                  isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                }`}
-              ></div>
+              {isMobileMenuOpen ? (
+                <FaTimes className="h-6 w-6 text-custom-text" />
+              ) : (
+                <FaBars className="h-6 w-6 text-custom-text" />
+              )}
             </button>
 
             <span className="font-cascadia text-custom-gray text-sm font-semibold">
@@ -93,7 +105,7 @@ const Navbar = () => {
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+            className="fixed inset-0 bg-custom-background bg-opacity-50 z-30"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <div
@@ -101,14 +113,13 @@ const Navbar = () => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Menu Header */}
-              <div className="bg-custom-purple-washed flex h-16 items-center justify-between px-4 border-b border-custom-purple">
+              <div className="bg-custom-purple-washed flex h-16 items-center justify-start px-4 border-b border-custom-purple">
                 <span className="font-cascadia text-custom-gray text-sm font-semibold">
                   Vaibhav_Mandavkar
                 </span>
-                <ThemeSwitcher />
               </div>
 
-              <nav className="flex flex-col font-cascadia text-sm font-bold">
+              <nav className="flex flex-col font-cascadia text-sm font-bold flex-grow">
                 {navItems.map((item) => (
                   <NavLink
                     key={item.label}
@@ -117,7 +128,7 @@ const Navbar = () => {
                       `h-12 flex items-center px-4 bg-custom-purple-washed border-b border-custom-purple ${
                         isActive
                           ? "text-custom-yellow"
-                          : "text-white hover:text-custom-yellow"
+                          : "text-custom-text hover:text-custom-yellow"
                       }`
                     }
                     end={item.exact}
@@ -127,6 +138,34 @@ const Navbar = () => {
                   </NavLink>
                 ))}
               </nav>
+
+              {/* Social Links and Resume */}
+              <div className="p-4 bg-custom-purple-washed border-t border-custom-purple">
+                {/* Social Icons */}
+                <div className="flex justify-center space-x-6 mb-4">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.alt}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-custom-text hover:text-custom-yellow"
+                    >
+                      <img src={link.img} alt={link.alt} className="h-6 w-6" />
+                    </a>
+                  ))}
+                </div>
+
+                {/* Resume Download Button */}
+                <a
+                  href="/vaibhav resume.pdf"
+                  download="Vaibhav_Mandavkar_Resume.pdf"
+                  className="block w-full text-center bg-custom-purple text-custom-text font-cascadia text-xs py-3 px-4 rounded hover:bg-opacity-80 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  _download_resume
+                </a>
+              </div>
             </div>
           </div>
         )}

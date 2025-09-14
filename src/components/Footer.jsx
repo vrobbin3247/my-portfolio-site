@@ -68,43 +68,7 @@ const Footer = () => {
         <div className="h-10 bg-custom-purple-washed flex-grow"></div>
       </footer>
 
-      {/* Mobile Footer */}
-      <footer className="md:hidden fixed bottom-0 w-full">
-        <div className="bg-custom-purple-washed border-t border-custom-purple">
-          {/* Top row - Contact and Resume */}
-          <div className="flex">
-            <button
-              className="flex-1 h-10 flex items-center justify-center font-cascadia text-xs font-bold text-custom-gray hover:text-custom-text border-r border-custom-purple"
-              onClick={() => setShowContactForm(true)}
-            >
-              _get_in_touch
-            </button>
-            <div className="flex-1 h-10 flex items-center justify-center font-cascadia text-xs font-bold text-custom-gray hover:text-custom-text">
-              <a
-                href="/vaibhav resume.pdf"
-                download="Vaibhav_Mandavkar_Resume.pdf"
-                className="w-full h-full flex items-center justify-center"
-              >
-                _download_resume
-              </a>
-            </div>
-          </div>
-
-          {/* Bottom row - Social links */}
-          <div className="flex border-t border-custom-purple">
-            {socialLinks.map((link, index) => (
-              <div
-                key={index}
-                className="flex-1 h-10 flex items-center justify-center font-cascadia text-custom-gray hover:text-custom-text border-r border-custom-purple last:border-r-0"
-              >
-                <a href={link.href} target="_blank" rel="noopener noreferrer">
-                  <img src={link.img} alt={link.alt} className="h-5" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </footer>
+      {/* Mobile Footer - REMOVED - Content moved to hamburger menu */}
 
       {/* Contact Form Modal - Responsive */}
       {showContactForm && (

@@ -25,7 +25,7 @@ const Hello = () => {
               </div>
 
               {/* Name and Passion Section */}
-              <div className="flex-1 space-y-0.5 pt-2">
+              <div className="flex-1 space-y-0.5 pt-2 min-w-0">
                 <div className="text-custom-green font-cascadia text-4xl leading-8 font-normal">
                   &lt;Vaibhav
                   <br />
@@ -37,21 +37,21 @@ const Hello = () => {
                   <div className="text-custom-text font-cascadia text-sm">
                     //I AM PASSIONATE ABOUT
                   </div>
-                  <div className="text-custom-purple font-cascadia font-bold text-xl">
+                  <div className="text-custom-purple font-cascadia font-bold text-xl break-all">
                     <TypeAnimation
                       sequence={[
                         "DATA ANALYSIS",
-                        1000,
-                        "ARTIFICIAL INTELLIGENCE",
-                        1000,
+                        500,
+                        "AI",
+                        500,
                         "MACHINE LEARNING",
-                        1000,
+                        500,
                         "DATA VISUALIZATION",
-                        1000,
+                        500,
                         "GENERATIVE AI",
-                        1000,
+                        500,
                       ]}
-                      speed={{ type: "keyStrokeDelayInMs", value: 100 }}
+                      speed={{ type: "keyStrokeDelayInMs", value: 250 }}
                       repeat={Infinity}
                     />
                   </div>
@@ -61,43 +61,55 @@ const Hello = () => {
           </div>
 
           {/* Code Section */}
-          <div className="bg-custom-purple-washed rounded-lg p-4 relative">
-            {/* Code content */}
-            <div className="font-cascadia text-xs text-custom-text space-y-1">
-              <div className="text-custom-yellow">&lt;hello&gt;</div>
-              <div>
-                Hello, my name is{" "}
-                <span className="text-custom-text">vaibhav()</span> &#123;
+          <div className="bg-custom-purple-washed rounded-lg p-3 relative">
+            <div className="flex space-x-2 font-cascadia text-xs">
+              {/* Line Numbers */}
+              <div className="text-custom-gray text-center">
+                {[...Array(15).keys()].map((i) => (
+                  <div key={i}>{i + 1}</div>
+                ))}
               </div>
-              <div>I'm a tech enthusiast pursuing a master's in</div>
-              <div>
-                <span className="text-custom-purple">AI and Data Science</span>.
+
+              {/* Code content */}
+              <div className="text-custom-text">
+                <div className="text-custom-yellow">&lt;hello&gt;</div>
+                <div>
+                  Hello, my name is{" "}
+                  <span className="text-custom-text">vaibhav()</span> &#123;
+                </div>
+                <div>I'm a tech enthusiast pursuing a master's in</div>
+                <div>
+                  <span className="text-custom-purple">
+                    AI and Data Science
+                  </span>
+                  .
+                </div>
+                <div>
+                  With industry experience in{" "}
+                  <span className="text-custom-blue">software</span>
+                </div>
+                <div>
+                  <span className="text-custom-blue">development</span>,
+                </div>
+                <div>I've built projects using modern frameworks like</div>
+                <div>
+                  <span className="text-custom-red">React</span>,{" "}
+                  <span className="text-custom-red">Flutter</span>,
+                </div>
+                <div>
+                  and cutting-edge technologies in{" "}
+                  <span className="text-custom-purple">AI, ML, and</span>
+                </div>
+                <div>
+                  <span className="text-custom-purple">deep learning</span>.
+                </div>
+                <div>Outside of tech, I find inspiration in the stars</div>
+                <div>
+                  and nature through{" "}
+                  <span className="text-custom-blue">photography</span>.
+                </div>
+                <div>&#125;</div>
               </div>
-              <div>
-                With industry experience in{" "}
-                <span className="text-custom-blue">software</span>
-              </div>
-              <div>
-                <span className="text-custom-blue">development</span>,
-              </div>
-              <div>I've built projects using modern frameworks like</div>
-              <div>
-                <span className="text-custom-red">React</span>,{" "}
-                <span className="text-custom-red">Flutter</span>,
-              </div>
-              <div>
-                and cutting-edge technologies in{" "}
-                <span className="text-custom-purple">AI, ML, and</span>
-              </div>
-              <div>
-                <span className="text-custom-purple">deep learning</span>.
-              </div>
-              <div>Outside of tech, I find inspiration in the stars</div>
-              <div>
-                and nature through{" "}
-                <span className="text-custom-blue">photography</span>.
-              </div>
-              <div>&#125;</div>
             </div>
 
             {/* Overlay mask effect */}

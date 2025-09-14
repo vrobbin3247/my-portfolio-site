@@ -4,7 +4,7 @@
 
 /* Light Theme */
 :root {
-  --color-background: #f9fafb;
+  --color-background: #f1eef8;
   --color-text: #1f2937;
   --color-gray: #939393;
   --color-purple-washed: #e2d6f9;
@@ -77,4 +77,108 @@ pre > div > pre {
   --tw-prose-pre-bg: var(--color-purple-washed);
   --tw-prose-th-borders: var(--color-purple-washed);
   --tw-prose-td-borders: var(--color-purple-washed);
+}
+/* Mobile-specific styles for your portfolio */
+
+/* Ensure full height on mobile */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Mobile layout adjustments */
+@media (max-width: 768px) {
+  /* Prevent horizontal scroll */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Adjust main container */
+  .main-container {
+    padding-bottom: 120px; /* Account for mobile footer height */
+  }
+
+  /* Profile image styling for mobile */
+  .mobile-profile-image {
+    background: linear-gradient(135deg, #444 0%, #666 100%);
+    border: 2px solid #555;
+  }
+
+  /* Mobile code block improvements */
+  .mobile-code-block {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  /* Improve touch targets */
+  button,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Mobile navigation improvements */
+  .mobile-nav-overlay {
+    backdrop-filter: blur(4px);
+  }
+
+  /* Mobile footer spacing */
+  .mobile-footer {
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Improve text readability on mobile */
+  .mobile-text {
+    line-height: 1.6;
+    word-wrap: break-word;
+  }
+
+  /* Mobile form improvements */
+  .mobile-form input,
+  .mobile-form textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Animation adjustments for mobile */
+  .mobile-typewriter {
+    font-size: clamp(16px, 5vw, 20px);
+  }
+}
+
+/* Landscape mobile adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobile-header {
+    height: 48px;
+  }
+
+  .mobile-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .mobile-footer {
+    height: 80px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .mobile-profile-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .mobile-profile-image {
+    margin: 0 auto 1rem;
+  }
+
+  .mobile-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mobile-code-text {
+    font-size: 10px;
+  }
 }

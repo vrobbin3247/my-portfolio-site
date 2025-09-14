@@ -171,20 +171,20 @@ const Projects = () => {
                           key={project.id}
                           className={`pl-8 py-2 cursor-pointer text-sm flex items-center ${
                             selectedProject === project.id
-                              ? "bg-custom_purple_washed text-white"
-                              : "text-custom-gray hover:text-white hover:bg-custom_purple_washed/50"
+                              ? "bg-custom_purple_washed text-custom-text"
+                              : "text-custom-gray hover:text-custom-text hover:bg-custom_purple_washed/50"
                           }`}
                           onClick={() => setSelectedProject(project.id)}
                         >
                           <span className="mr-2">
                             {project.technologies[0] === "Python" && (
-                              <FaPython className="text-yellow-400" />
+                              <FaPython className="text-custom-yellow" />
                             )}
                             {project.technologies[0] === "React" && (
-                              <FaReact className="text-cyan-500" />
+                              <FaReact className="text-custom-blue" />
                             )}
                           </span>
-                          <div className="flex items-center gap-4 text-white">
+                          <div className="flex items-center gap-4 text-custom-text">
                             <span className="font-bold">{project.title}</span>
 
                             {project.live ? (
@@ -197,7 +197,7 @@ const Projects = () => {
                                 Try
                               </a>
                             ) : (
-                              <span className="text-gray-500 cursor-not-allowed">
+                              <span className="text-custom-gray cursor-not-allowed">
                                 Try
                               </span>
                             )}
@@ -220,7 +220,7 @@ const Projects = () => {
             </div>
 
             {/* Right Content Area */}
-            <div className="w-2/3 pl-4 overflow-y-auto text-white">
+            <div className="w-2/3 pl-4 overflow-y-auto text-custom-text">
               {selectedProject ? (
                 <div>
                   {(() => {
@@ -239,10 +239,10 @@ const Projects = () => {
                           {loading ? (
                             <p>Loading markdown...</p>
                           ) : error ? (
-                            <p className="text-red-500">Error: {error}</p>
+                            <p className="text-custom-red">Error: {error}</p>
                           ) : (
                             <div className="all-unset">
-                              <div className="prose prose-invert max-w-none">
+                              <div className="prose max-w-none">
                                 <MarkdownRenderer content={markdownContent} />
                               </div>
                             </div>

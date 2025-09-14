@@ -169,7 +169,7 @@ export default function CreativePortfolio() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-custom-background text-white p-8 flex flex-col items-center justify-center gap-4">
+      <div className="min-h-screen bg-custom-background text-custom-text p-8 flex flex-col items-center justify-center gap-4">
         <Loader className="w-8 h-8 text-custom-yellow animate-spin" />
         <p className="text-xl font-cascadia">Loading creative portfolio...</p>
       </div>
@@ -177,7 +177,7 @@ export default function CreativePortfolio() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-100px)] bg-custom-background text-white p-4 md:p-8 font-cascadia pb-20">
+    <div className="min-h-[calc(100vh-100px)] bg-custom-background text-custom-text p-4 md:p-8 font-cascadia pb-20">
       <div className=" p-6 mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 font-cascadia">
@@ -271,14 +271,14 @@ export default function CreativePortfolio() {
                   )}
                   <div className="relative z-0">{renderMediaItem(item)}</div>
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <ZoomIn className="text-white w-8 h-8 bg-black/50 p-1 rounded-full pointer-events-none" />
+                    <ZoomIn className="text-custom-text w-8 h-8 bg-custom-background/50 p-1 rounded-full pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                   {item.caption && (
-                    <p className="text-white font-medium mb-2 font-cascadia">
+                    <p className="text-custom-text font-medium mb-2 font-cascadia">
                       {item.caption}
                     </p>
                   )}
@@ -373,7 +373,7 @@ export default function CreativePortfolio() {
 
       {/* Media Preview Modal */}
       {previewItem && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-custom-background/90 z-50 flex items-center justify-center p-4">
           <button
             onClick={closePreview}
             className="absolute top-4 right-4 p-2 bg-custom_purple_washed/50 rounded-full hover:bg-custom_purple_washed transition"

@@ -1,35 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw"; // ✅ parse raw HTML in Markdown
-import remarkGfm from "remark-gfm"; // ✅ optional, for tables, etc.
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  coldarkDark,
+  coy,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const MarkdownRenderer = ({ content }) => {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const currentTheme =
+        document.documentElement.getAttribute("data-theme") || "light";
+      setTheme(currentTheme);
+    };
+
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // This function takes a syntax highlighter theme and overrides its default container styles
+  const getFinalStyle = (themeStyle) => ({
+    ...themeStyle,
+    'pre[class*="language-"]': {
+      ...themeStyle['pre[class*="language-"]'],
+      // Reset container styles. We'll handle these with Tailwind on the wrapper div.
+      margin: "0",
+      padding: "0",
+      background: "transparent",
+      border: "none",
+      borderRadius: "0",
+    },
+    'code[class*="language-"]': {
+      ...themeStyle['code[class*="language-"]'],
+      background: "transparent", // Ensure code tag also has no background
+    },
+  });
+
+  const syntaxHighlighterStyle =
+    theme === "dark" ? getFinalStyle(coldarkDark) : getFinalStyle(coy);
+
   return (
-    <div className="prose prose-invert max-w-none">
+    <div className="prose max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]} // ✅ allow HTML like <div> and <img>
+        rehypePlugins={[rehypeRaw]}
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
             const language = match ? match[1] : "";
 
             return !inline && match ? (
-              <div className="my-4 rounded-lg overflow-hidden border-0">
+              // Use a wrapper div to handle all container styling
+              <div className="p-4 rounded-lg overflow-hidden border-0 bg-custom-background">
                 <SyntaxHighlighter
-                  style={coldarkDark}
+                  style={syntaxHighlighterStyle}
                   language={language}
-                  PreTag="div"
-                  className="rounded-lg border-0"
-                  customStyle={{
-                    background: "#0f172a",
-                    border: "none",
-                    margin: 0,
-                    padding: "1rem",
-                    borderRadius: "0.5rem",
-                  }}
                   showLineNumbers={true}
                   {...props}
                 >
@@ -38,7 +71,7 @@ const MarkdownRenderer = ({ content }) => {
               </div>
             ) : (
               <code
-                className="bg-gray-700 rounded px-1 py-0.5 text-sm border-0"
+                className="bg-custom-purple-washed rounded px-1 py-0.5 text-sm border-0"
                 {...props}
               >
                 {children}
@@ -53,7 +86,7 @@ const MarkdownRenderer = ({ content }) => {
           },
 
           p({ node, ...props }) {
-            return <p {...props} className="my-4 text-gray-300" />;
+            return <p {...props} className="my-4 text-custom-text" />;
           },
         }}
       >

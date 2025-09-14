@@ -27,7 +27,7 @@ const Hello = () => {
           <div>19</div>
           <div>20</div>
         </div>
-        <div class="py-[200px] text-neutral-50 col-span-7">
+        <div class="py-[200px] text-custom-text col-span-7">
           <p>
             <div className="text-custom-yellow">&lt;hello&gt;</div>
             {/* <br /> */}
@@ -67,7 +67,7 @@ const Hello = () => {
           <div class="">Mandavkar&gt;</div>
         </div>
         <div class="space-y-[-10px]">
-          <div class="text-5xl font-cascadia text-white">
+          <div class="text-5xl font-cascadia text-custom-text">
             //I AM PASSIONATE ABOUT  
           </div>
           <div class="text-[60px] font-bold font-cascadia text-custom-purple">

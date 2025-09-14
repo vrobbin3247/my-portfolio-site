@@ -32,7 +32,7 @@ const Footer = () => {
   return (
     <footer className="fixed bottom-0 flex flex-row space-x-0.5 w-full">
       <div
-        className="h-10 flex items-center justify-center w-40 font-cascadia text-sm font-bold text-custom-gray hover:text-white bg-custom_purple_washed cursor-pointer"
+        className="h-10 flex items-center justify-center w-40 font-cascadia text-sm font-bold text-custom-gray hover:text-custom-text bg-custom-purple-washed cursor-pointer"
         onClick={() => setShowContactForm(true)}
       >
         _get_in_touch
@@ -40,16 +40,16 @@ const Footer = () => {
 
       {/* Contact Form Modal */}
       {showContactForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-custom_purple_washed p-6 rounded-lg w-full max-w-md relative">
+        <div className="fixed inset-0 bg-custom-background bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-custom-purple-washed p-6 rounded-lg w-full max-w-md relative">
             <button
               onClick={() => setShowContactForm(false)}
-              className="absolute top-4 right-4 text-custom-gray hover:text-white"
+              className="absolute top-4 right-4 text-custom-gray hover:text-custom-text"
             >
               ✕
             </button>
 
-            <h3 className="font-cascadia text-xl font-bold mb-4 text-white">
+            <h3 className="font-cascadia text-xl font-bold mb-4 text-custom-text">
               Contact Me
             </h3>
 
@@ -62,7 +62,7 @@ const Footer = () => {
                   type="text"
                   name="subject"
                   required
-                  className="w-full bg-custom_purple rounded border border-custom_purple_washed p-2 text-white focus:outline-none focus:border-custom-purple"
+                  className="w-full bg-custom_purple rounded border border-custom-purple-washed p-2 text-custom-text focus:outline-none focus:border-custom-purple"
                 />
               </div>
 
@@ -74,13 +74,13 @@ const Footer = () => {
                   name="message"
                   required
                   rows="4"
-                  className="w-full bg-custom_purple rounded border border-custom_purple_washed p-2 text-white focus:outline-none focus:border-custom-purple"
+                  className="w-full bg-custom_purple rounded border border-custom-purple-washed p-2 text-custom-text focus:outline-none focus:border-custom-purple"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-custom-purple hover:bg-custom_purple_washed text-white font-cascadia py-2 px-4 rounded transition-colors"
+                className="w-full bg-custom-purple hover:bg-custom-purple-washed text-custom-text font-cascadia py-2 px-4 rounded transition-colors"
               >
                 Send Message
               </button>
@@ -93,7 +93,7 @@ const Footer = () => {
       {socialLinks.map((link, index) => (
         <div
           key={index}
-          className="h-10 flex items-center justify-center w-12 font-cascadia text-custom-gray hover:text-white bg-custom_purple_washed"
+          className="h-10 flex items-center justify-center w-12 font-cascadia text-custom-gray hover:text-custom-text bg-custom-purple-washed"
         >
           <a href={link.href} target="_blank" rel="noopener noreferrer">
             <img src={link.img} alt={link.alt} className="h-6" />
@@ -102,7 +102,7 @@ const Footer = () => {
       ))}
 
       {/* Resume download */}
-      <div className="h-10 flex items-center justify-center w-40 font-cascadia text-sm font-bold text-custom-gray hover:text-white bg-custom_purple_washed">
+      <div className="h-10 flex items-center justify-center w-40 font-cascadia text-sm font-bold text-custom-gray hover:text-custom-text bg-custom-purple-washed">
         <a
           href="/vaibhav resume.pdf"
           download="Vaibhav_Mandavkar_Resume.pdf"
@@ -113,7 +113,7 @@ const Footer = () => {
       </div>
 
       {/* Responsive spacer */}
-      <div className="h-10 bg-custom_purple_washed flex-grow"></div>
+      <div className="h-10 bg-custom-purple-washed flex-grow"></div>
     </footer>
   );
 };

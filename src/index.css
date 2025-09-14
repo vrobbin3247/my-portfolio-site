@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light Theme */
+:root {
+  --color-background: #f9fafb;
+  --color-text: #1f2937;
+  --color-gray: #939393;
+  --color-purple-washed: #e2d6f9;
+  --color-yellow: #f0b65a;
+  --color-red: #ff6b6b;
+  --color-green: #99b84a;
+  --color-blue: #1e95e7;
+  --color-purple: #895197;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --color-background: #1f1e25;
+  --color-text: #f9fafb;
+  --color-gray: #939393;
+  --color-purple-washed: #2c2b32;
+  --color-yellow: #f0b65a;
+  --color-red: #ff6b6b;
+  --color-green: #99b84a;
+  --color-blue: #1e95e7;
+  --color-purple: #895197;
+}
+
 .all-unset {
   all: unset;
 }
@@ -19,12 +45,36 @@
   overflow-x: auto;
   font-family: "Cascadia Code", monospace;
   margin: 0;
+  margin: 0px;
 }
 pre > div {
   padding: 0;
   margin: 0;
 }
 
+pre > div > pre {
+  margin: 0px;
+}
+
 .prose h2 {
   margin-top: 24px;
+}
+
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-lead: var(--color-text);
+  --tw-prose-links: var(--color-blue);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-gray);
+  --tw-prose-bullets: var(--color-gray);
+  --tw-prose-hr: var(--color-purple-washed);
+  --tw-prose-quotes: var(--color-text);
+  --tw-prose-quote-borders: var(--color-purple-washed);
+  --tw-prose-captions: var(--color-gray);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-code: var(--color-text);
+  --tw-prose-pre-bg: var(--color-purple-washed);
+  --tw-prose-th-borders: var(--color-purple-washed);
+  --tw-prose-td-borders: var(--color-purple-washed);
 }

@@ -4,14 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        "custom-gray": "#939393",
-        custom_purple_washed: "#2C2B32",
-        "custom-yellow": "#F0B65A",
-        "custom-red": "#FF6B6B",
-        "custom-green": "#99B84A",
-        "custom-blue": "#1E95E7",
-        "custom-purple": "#895197",
-        "custom-background": "#1F1E25",
+        'custom-gray': 'var(--color-gray)',
+        'custom-purple-washed': 'var(--color-purple-washed)',
+        'custom-yellow': 'var(--color-yellow)',
+        'custom-red': 'var(--color-red)',
+        'custom-green': 'var(--color-green)',
+        'custom-blue': 'var(--color-blue)',
+        'custom-purple': 'var(--color-purple)',
+        'custom-background': 'var(--color-background)',
+        'custom-text': 'var(--color-text)', // Added a text color
       },
       fontFamily: {
         inter: ["Inter", "serif"],

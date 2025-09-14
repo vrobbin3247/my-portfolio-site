@@ -39,9 +39,9 @@ const Skills = () => {
           <span className="text-custom-gray w-6">{index + 1}</span>
           <span className="text-custom-yellow mr-2">const</span>
           <span className="text-custom-blue">{skill.name}</span>
-          <span className="text-white mx-2">=</span>
+          <span className="text-custom-text mx-2">=</span>
           <span className="text-custom-green">{skill.proficiency}%</span>
-          <span className="text-white">;</span>
+          <span className="text-custom-text">;</span>
         </div>
         <div className="ml-6 mt-1 bg-custom_purple_washed h-1.5 w-full rounded-full overflow-hidden">
           <div
@@ -54,43 +54,43 @@ const Skills = () => {
   };
 
   return (
-    <div className="bg-custom-background text-white p-6 font-cascadia w-full h-full overflow-auto">
+    <div className="bg-custom-background text-custom-text p-6 font-cascadia w-full h-full overflow-auto">
       <div className="flex flex-col">
         <div className="text-custom-gray mb-4">// Skills and competencies</div>
 
         <div className="mb-4">
           <span className="text-custom-purple">class</span>
           <span className="text-custom-yellow ml-2">TechnicalSkills</span>
-          <span className="text-white ml-2">&#123;</span>
+          <span className="text-custom-text ml-2">&#123;</span>
         </div>
         <div className="ml-6 mb-6">
           {technicalSkills.map((skill, index) =>
             renderSkill(skill, index, "tech")
           )}
         </div>
-        <div className="text-white mb-4">&#125;</div>
+        <div className="text-custom-text mb-4">&#125;</div>
 
         <div className="mb-4">
           <span className="text-custom-purple">class</span>
           <span className="text-custom-yellow ml-2">AIandML</span>
-          <span className="text-white ml-2">&#123;</span>
+          <span className="text-custom-text ml-2">&#123;</span>
         </div>
         <div className="ml-6 mb-6">
           {aiSkills.map((skill, index) => renderSkill(skill, index, "ai"))}
         </div>
-        <div className="text-white mb-4">&#125;</div>
+        <div className="text-custom-text mb-4">&#125;</div>
 
         <div className="mb-4">
           <span className="text-custom-purple">class</span>
           <span className="text-custom-yellow ml-2">OtherSkills</span>
-          <span className="text-white ml-2">&#123;</span>
+          <span className="text-custom-text ml-2">&#123;</span>
         </div>
         <div className="ml-6 mb-6">
           {otherSkills.map((skill, index) =>
             renderSkill(skill, index, "other")
           )}
         </div>
-        <div className="text-white mb-4">&#125;</div>
+        <div className="text-custom-text mb-4">&#125;</div>
 
         <div className="mt-6 text-custom-gray">
           // Always learning and expanding my expertise

@@ -10,7 +10,7 @@ import React from "react";
 
 function App() {
   return (
-    <div className="">
+    <div className="bg-custom-background text-custom-text min-h-screen">
       {/* StarrySky as Background */}
       {/* <div className="absolute inset-0 z-0 pointer-events-none">
         <StarrySky />

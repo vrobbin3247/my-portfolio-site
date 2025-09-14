@@ -12,6 +12,7 @@ export default {
         'custom-blue': 'var(--color-blue)',
         'custom-purple': 'var(--color-purple)',
         'custom-background': 'var(--color-background)',
+        'custom-background-translucent': 'rgba(var(--color-background-rgb), 0.9)',
         'custom-text': 'var(--color-text)', // Added a text color
       },
       fontFamily: {

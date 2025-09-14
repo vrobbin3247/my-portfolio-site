@@ -4,7 +4,8 @@
 
 /* Light Theme */
 :root {
-  --color-background: #f1eef8;
+  --color-background: #F9FAFB;
+  --color-background-rgb: 249, 250, 251;
   --color-text: #1f2937;
   --color-gray: #939393;
   --color-purple-washed: #e2d6f9;
@@ -18,6 +19,7 @@
 /* Dark Theme */
 [data-theme="dark"] {
   --color-background: #1f1e25;
+  --color-background-rgb: 31, 30, 37;
   --color-text: #f9fafb;
   --color-gray: #939393;
   --color-purple-washed: #2c2b32;

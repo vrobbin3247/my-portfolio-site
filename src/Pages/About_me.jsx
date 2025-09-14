@@ -21,6 +21,17 @@ export default function CreativePortfolio() {
   const [relatedMedia, setRelatedMedia] = useState([]);
   const masonryRef = useRef(null);
 
+  useEffect(() => {
+    if (previewItem) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [previewItem]);
+
   const openPreview = (item) => {
     setPreviewItem(item);
     // Find related media with enhanced matching
@@ -178,13 +189,13 @@ export default function CreativePortfolio() {
 
   return (
     <div className="min-h-[calc(100vh-100px)] bg-custom-background text-custom-text p-4 md:p-8 font-cascadia pb-20">
-      <div className=" p-6 mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 font-cascadia">
+      <div className="p-4 md:p-6 mx-auto">
+        <div className="mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold mb-2 font-cascadia">
             My Creative Journey
           </h1>
-          <p className="text-custom-gray text-lg font-cascadia">
-            A showcase of my design work, 3D models, photography and creative
+          <p className="text-custom-gray text-base md:text-lg font-cascadia">
+            A showcase of my design work, 3D models, photography, and creative
             projects outside of coding.
           </p>
         </div>
@@ -192,7 +203,7 @@ export default function CreativePortfolio() {
         {/* Filter Section */}
         <div className="mb-6 relative">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold font-cascadia">
+            <h2 className="text-lg md:text-xl font-semibold font-cascadia">
               Projects & Creations
             </h2>
             <button
@@ -205,33 +216,47 @@ export default function CreativePortfolio() {
           </div>
 
           {isFilterOpen && (
-            <div className="bg-custom_purple_washed p-4 rounded-md mb-4 animate-fade-in">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="font-medium font-cascadia">Filter by tags</h3>
-                {selectedTags.length > 0 && (
-                  <button
-                    onClick={clearFilters}
-                    className="text-custom-red text-sm hover:underline flex items-center gap-1"
-                  >
-                    <X size={14} /> Clear all
-                  </button>
-                )}
-              </div>
+            <div className="fixed inset-0 bg-custom-background-translucent z-40 flex items-center justify-center p-4">
+              <div
+                className="bg-custom_purple_washed p-6 rounded-lg w-full max-w-md relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setIsFilterOpen(false)}
+                  className="absolute top-4 right-4 text-custom-gray hover:text-custom-text"
+                >
+                  <X size={24} />
+                </button>
 
-              <div className="flex flex-wrap gap-2">
-                {allTags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => toggleTag(tag)}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      selectedTags.includes(tag)
-                        ? "bg-custom-yellow text-custom-background"
-                        : "bg-custom-background text-custom-gray hover:bg-opacity-80"
-                    } transition`}
-                  >
-                    {tag}
-                  </button>
-                ))}
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-medium font-cascadia text-lg">
+                    Filter by tags
+                  </h3>
+                  {selectedTags.length > 0 && (
+                    <button
+                      onClick={clearFilters}
+                      className="text-custom-red text-sm hover:underline flex items-center gap-1"
+                    >
+                      <X size={14} /> Clear all
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {allTags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => toggleTag(tag)}
+                      className={`px-3 py-1 rounded-full text-sm ${
+                        selectedTags.includes(tag)
+                          ? "bg-custom-yellow text-custom-background"
+                          : "bg-custom-background text-custom-gray hover:bg-opacity-80"
+                      } transition`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -247,13 +272,13 @@ export default function CreativePortfolio() {
         ) : (
           <div
             ref={masonryRef}
-            className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 pb-8"
+            className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-4 pb-8"
             style={{ columnFill: "balance" }}
           >
             {filteredMedia.map((item) => (
               <div
                 key={item.id}
-                className="group relative overflow-hidden rounded-md break-inside-avoid mb-4 transform hover:scale-[1.01] transition-transform duration-200"
+                className="group relative overflow-hidden rounded-md break-inside-avoid mb-4 md:transform md:hover:scale-[1.01] transition-transform duration-200"
               >
                 {/* Media Content - Preserves Aspect Ratio */}
                 <div className="w-full relative">
@@ -270,13 +295,13 @@ export default function CreativePortfolio() {
                     </div>
                   )}
                   <div className="relative z-0">{renderMediaItem(item)}</div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="absolute inset-0 flex-col items-center justify-center opacity-0 md:hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden md:flex">
                     <ZoomIn className="text-custom-text w-8 h-8 bg-custom-background/50 p-1 rounded-full pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex-col justify-end p-4 hidden md:flex">
                   {item.caption && (
                     <p className="text-custom-text font-medium mb-2 font-cascadia">
                       {item.caption}
@@ -292,7 +317,7 @@ export default function CreativePortfolio() {
                             e.stopPropagation();
                             toggleTag(tag);
                           }}
-                          className="text-xs bg-custom-background/80 text-custom-yellow px-2 py-1 rounded-full cursor-pointer hover:bg-custom-background transition"
+                          className="text-xs bg-custom-background/80 text-custom-yellow px-2 py-1 rounded-full cursor-pointer md:hover:bg-custom-background transition"
                         >
                           #{tag}
                         </span>
@@ -306,65 +331,64 @@ export default function CreativePortfolio() {
         )}
 
         {/* Project Descriptions Section */}
-        <div className="mt-16 space-y-8 bg-custom_purple_washed p-6 rounded-lg">
-          <h2 className="text-2xl font-bold mb-6 border-b border-custom-gray/30 pb-2 font-cascadia">
+        <div className="mt-12 space-y-6 bg-custom_purple_washed p-4 md:p-6 rounded-lg">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 border-b border-custom-gray/30 pb-2 font-cascadia">
             Featured Projects
           </h2>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div>
-              <h3 className="text-xl font-semibold text-custom-yellow font-cascadia">
+              <h3 className="text-lg md:text-xl font-semibold text-custom-yellow font-cascadia">
                 Enamel Pin Brand - Uvaan
               </h3>
-              <p className="mt-2 text-custom-gray">
+              <p className="mt-1 text-sm md:text-base text-custom-gray">
                 Designed Shivaji Maharaj's Rajmudra as an enamel pin, from
                 initial concept in Illustrator to 3D modeling in Blender for
                 material selection. Created complete packaging, mockups, and
-                promotional materials using Blender, Photoshop and Lightroom.
+                promotional materials.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-custom-green font-cascadia">
+              <h3 className="text-lg md:text-xl font-semibold text-custom-green font-cascadia">
                 Poster Store
               </h3>
-              <p className="mt-2 text-custom-gray font-cascadia">
-                Curated and processed vintage and modern posters spanning anime,
-                movies (Hindi/English), superhero content, sitcoms, and F1.
-                Created batch mockups in Photoshop and built a Shopify
-                storefront with promotional materials rendered in Blender.
+              <p className="mt-1 text-sm md:text-base text-custom-gray">
+                Curated and processed vintage and modern posters. Created batch
+                mockups in Photoshop and built a Shopify storefront with
+                promotional materials rendered in Blender.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-custom-blue font-cascadia">
+              <h3 className="text-lg md:text-xl font-semibold text-custom-blue font-cascadia">
                 Blender Creations
               </h3>
-              <p className="mt-2 text-custom-gray font-cascadia">
+              <p className="mt-1 text-sm md:text-base text-custom-gray">
                 Designed various 3D scenes, sticker mockups, and short
-                promotional videos for personal projects and family. Developed
-                realistic product mockups for visual merchandising.
+                promotional videos. Developed realistic product mockups for
+                visual merchandising.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-custom-purple font-cascadia">
+              <h3 className="text-lg md:text-xl font-semibold text-custom-purple font-cascadia">
                 Apparel Design
               </h3>
-              <p className="mt-2 text-custom-gray font-cascadia">
+              <p className="mt-1 text-sm md:text-base text-custom-gray">
                 Created original T-shirt designs in Illustrator and produced
                 photorealistic mockups to visualize the final products.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-custom-red">
+              <h3 className="text-lg md:text-xl font-semibold text-custom-red">
                 Astrophotography
               </h3>
-              <p className="mt-2 text-custom-gray">
-                Captured astronomical phenomena including the Milky Way galaxy
-                and Geminid meteor shower. Also passionate about landscape
-                photography to document natural beauty.
+              <p className="mt-1 text-sm md:text-base text-custom-gray">
+                Captured astronomical phenomena including the Milky Way and
+                Geminid meteor shower. Also passionate about landscape
+                photography.
               </p>
             </div>
           </div>
@@ -373,7 +397,10 @@ export default function CreativePortfolio() {
 
       {/* Media Preview Modal */}
       {previewItem && (
-        <div className="fixed inset-0 bg-custom-background/90 z-50 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 bg-custom-background-translucent z-50 flex items-center justify-center p-4"
+          onClick={closePreview}
+        >
           <button
             onClick={closePreview}
             className="absolute top-4 right-4 p-2 bg-custom_purple_washed/50 rounded-full hover:bg-custom_purple_washed transition"
@@ -381,9 +408,16 @@ export default function CreativePortfolio() {
             <X size={24} />
           </button>
 
-          <div className="max-w-4xl w-full flex flex-col md:flex-row gap-6">
+          <div
+            className="max-w-4xl w-full flex flex-col md:flex-row gap-6 h-full overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex-1">
-              <Zoom zoomMargin={40}>{renderMediaItem(previewItem, true)}</Zoom>
+              <div className="flex-shrink-0">
+                <Zoom zoomMargin={40}>
+                  {renderMediaItem(previewItem, true)}
+                </Zoom>
+              </div>
               <div className="mt-4">
                 <h3 className="text-xl font-semibold">
                   {previewItem.caption || previewItem.file_name}
@@ -404,7 +438,7 @@ export default function CreativePortfolio() {
             </div>
 
             {relatedMedia.length > 0 && (
-              <div className="w-full md:w-64 flex-shrink-0">
+              <div className="w-full md:w-64 flex-shrink-0 mt-8 md:mt-0">
                 <h4 className="text-lg font-semibold mb-4">Related Media</h4>
                 <div className="grid grid-cols-2 gap-2">
                   {relatedMedia.map((item) => (
@@ -414,14 +448,6 @@ export default function CreativePortfolio() {
                       onClick={() => openPreview(item)}
                     >
                       {renderMediaItem(item)}
-                      {/* {previewItem?.tags?.length > 0 && (
-                        <div className="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-1 rounded">
-                          {Math.round(
-                            (item.matchScore / previewItem.tags.length) * 100
-                          )}
-                          % match
-                        </div>
-                      )} */}
                     </div>
                   ))}
                 </div>

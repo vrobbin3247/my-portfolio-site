@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedSkillBar from "../components/AnimatedSkillBar";
 
 const Skills = () => {
   // Technical skills with proficiency levels based on your resume and GitHub
@@ -34,65 +35,64 @@ const Skills = () => {
 
   const renderSkill = (skill, index, prefix) => {
     return (
-      <div key={`${prefix}-${index}`} className="mb-2">
-        <div className="flex items-center">
-          <span className="text-custom-gray w-6">{index + 1}</span>
-          <span className="text-custom-yellow mr-2">const</span>
-          <span className="text-custom-blue">{skill.name}</span>
-          <span className="text-custom-text mx-2">=</span>
+      <div key={`${prefix}-${index}`} className="mb-3">
+        <div className="flex items-center text-xs md:text-sm">
+          <span className="text-custom-gray w-6 text-right mr-2">
+            {index + 1}
+          </span>
+          <span className="text-custom-yellow mr-1.5">const</span>
+          <span className="text-custom-blue mr-1.5">{skill.name}</span>
+          <span className="text-custom-text mr-1.5">=</span>
           <span className="text-custom-green">{skill.proficiency}%</span>
           <span className="text-custom-text">;</span>
         </div>
-        <div className="ml-6 mt-1 bg-custom_purple_washed h-1.5 w-full rounded-full overflow-hidden">
-          <div
-            className="bg-custom-purple h-full rounded-full"
-            style={{ width: `${skill.proficiency}%` }}
-          ></div>
-        </div>
+        <AnimatedSkillBar proficiency={skill.proficiency} />
       </div>
     );
   };
 
   return (
-    <div className="bg-custom-background text-custom-text p-6 font-cascadia w-full h-full overflow-auto">
-      <div className="flex flex-col">
-        <div className="text-custom-gray mb-4">// Skills and competencies</div>
+    <div className="bg-custom-background text-custom-text p-4 md:p-8 font-cascadia w-full min-h-screen">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-custom-gray text-sm md:text-base mb-4">
+          // Skills and competencies
+        </div>
 
-        <div className="mb-4">
+        <div className="mb-4 text-base md:text-lg">
           <span className="text-custom-purple">class</span>
           <span className="text-custom-yellow ml-2">TechnicalSkills</span>
           <span className="text-custom-text ml-2">&#123;</span>
         </div>
-        <div className="ml-6 mb-6">
+        <div className="pl-4 md:pl-6 mb-4">
           {technicalSkills.map((skill, index) =>
             renderSkill(skill, index, "tech")
           )}
         </div>
-        <div className="text-custom-text mb-4">&#125;</div>
+        <div className="text-custom-text mb-4 text-base md:text-lg">&#125;</div>
 
-        <div className="mb-4">
+        <div className="mb-4 text-base md:text-lg">
           <span className="text-custom-purple">class</span>
           <span className="text-custom-yellow ml-2">AIandML</span>
           <span className="text-custom-text ml-2">&#123;</span>
         </div>
-        <div className="ml-6 mb-6">
+        <div className="pl-4 md:pl-6 mb-4">
           {aiSkills.map((skill, index) => renderSkill(skill, index, "ai"))}
         </div>
-        <div className="text-custom-text mb-4">&#125;</div>
+        <div className="text-custom-text mb-4 text-base md:text-lg">&#125;</div>
 
-        <div className="mb-4">
+        <div className="mb-4 text-base md:text-lg">
           <span className="text-custom-purple">class</span>
           <span className="text-custom-yellow ml-2">OtherSkills</span>
           <span className="text-custom-text ml-2">&#123;</span>
         </div>
-        <div className="ml-6 mb-6">
+        <div className="pl-4 md:pl-6 mb-4">
           {otherSkills.map((skill, index) =>
             renderSkill(skill, index, "other")
           )}
         </div>
-        <div className="text-custom-text mb-4">&#125;</div>
+        <div className="text-custom-text mb-4 text-base md:text-lg">&#125;</div>
 
-        <div className="mt-6 text-custom-gray">
+        <div className="mt-6 text-custom-gray text-sm">
           // Always learning and expanding my expertise
         </div>
       </div>

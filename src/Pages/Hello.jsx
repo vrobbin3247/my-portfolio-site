@@ -94,7 +94,7 @@ const Hello = () => {
                 <div>I've built projects using modern frameworks like</div>
                 <div>
                   <span className="text-custom-red">React</span>,{" "}
-                  <span className="text-custom-red">Flutter</span>,
+                  <span className="text-custom-red">Streamlit</span>,
                 </div>
                 <div>
                   and cutting-edge technologies in{" "}
@@ -124,9 +124,14 @@ const Hello = () => {
             >
               view my projects
             </Link>
-            {/* <button className="flex-1 border border-custom-gray text-custom-text font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-gray hover:text-custom-background transition-colors">
-              connect with me
-            </button> */}
+            <a
+              href="https://github.com/vrobbin3247"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 text-center border border-custom-gray text-custom-text font-cascadia text-xs py-2 px-4 rounded hover:bg-custom-gray hover:text-custom-background transition-colors"
+            >
+              visit github
+            </a>
           </div>
         </div>
       </div>
@@ -173,7 +178,7 @@ const Hello = () => {
               <br />
               I've built projects using modern frameworks like
               <br />
-              <span className="text-custom-red"> React, Flutter,</span>
+              <span className="text-custom-red"> React, Streamlit</span>
               <br />
               and cutting-edge technologies in
               <span className="text-custom-purple"> AI, ML, and </span>

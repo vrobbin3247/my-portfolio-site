@@ -69,7 +69,8 @@ export default function CreativePortfolio() {
 
         const { data, error } = await supabase
           .from("media_metadata")
-          .select("*");
+          .select("*")
+          .limit(2000); // Set a high limit to fetch all media
 
         const shuffledData = shuffleArray(data);
 
@@ -191,10 +192,10 @@ export default function CreativePortfolio() {
     <div className="min-h-[calc(100vh-100px)] bg-custom-background text-custom-text p-4 md:p-8 font-cascadia pb-20">
       <div className="p-4 md:p-6 mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2 font-cascadia">
+          <h1 className="text-xl md:text-3xl font-bold mb-2 font-cascadia">
             My Creative Journey
           </h1>
-          <p className="text-custom-gray text-base md:text-lg font-cascadia">
+          <p className="text-custom-gray text-sm md:text-lg font-cascadia">
             A showcase of my design work, 3D models, photography, and creative
             projects outside of coding.
           </p>
@@ -203,7 +204,7 @@ export default function CreativePortfolio() {
         {/* Filter Section */}
         <div className="mb-6 relative">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg md:text-xl font-semibold font-cascadia">
+            <h2 className="text-base md:text-xl font-semibold font-cascadia">
               Projects & Creations
             </h2>
             <button
@@ -232,14 +233,6 @@ export default function CreativePortfolio() {
                   <h3 className="font-medium font-cascadia text-lg">
                     Filter by tags
                   </h3>
-                  {selectedTags.length > 0 && (
-                    <button
-                      onClick={clearFilters}
-                      className="text-custom-red text-sm hover:underline flex items-center gap-1"
-                    >
-                      <X size={14} /> Clear all
-                    </button>
-                  )}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -256,6 +249,14 @@ export default function CreativePortfolio() {
                       {tag}
                     </button>
                   ))}
+                  {selectedTags.length > 0 && (
+                    <button
+                      onClick={clearFilters}
+                      className="text-custom-red text-sm hover:underline flex items-center gap-1"
+                    >
+                      <X size={14} /> Clear all
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

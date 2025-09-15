@@ -7,6 +7,7 @@ import Hello from "./Pages/Hello";
 import StarrySky from "./components/StarrySky";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import React from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         {/* <Navbar /> */}
         <Footer />
       </div>
+      <Analytics />
     </div>
   );
 }

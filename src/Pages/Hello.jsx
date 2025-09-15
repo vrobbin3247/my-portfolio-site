@@ -16,9 +16,9 @@ const Hello = () => {
           <div className="flex justify-center">
             <div className="flex items-center space-x-4">
               {/* Profile Image */}
-              <div className="w-24 h-28 bg-custom-purple-washed rounded-3xl overflow-hidden border-2 border-custom-gray flex-shrink-0">
+              <div className="w-28 h-30 rounded-3xl overflow-hidden flex-shrink-0">
                 <img
-                  src="/static/images/profile.png"
+                  src="/static/images/profile_pic.png"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />

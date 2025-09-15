@@ -4,12 +4,12 @@
 
 /* Light Theme */
 :root {
-  --color-background: #F9FAFB;
+  --color-background: #f9fafb;
   --color-background-rgb: 249, 250, 251;
   --color-text: #1f2937;
-  --color-gray: #939393;
+  --color-gray: #656565;
   --color-purple-washed: #e2d6f9;
-  --color-yellow: #f0b65a;
+  --color-yellow: #e1a33f;
   --color-red: #ff6b6b;
   --color-green: #99b84a;
   --color-blue: #1e95e7;
@@ -40,8 +40,7 @@
 }
 
 .prose pre {
-  background-color: #1f1e25;
-  color: #f8fafc;
+  font-size: 12.25px;
   padding: 0;
   border-radius: 8px;
   overflow-x: auto;

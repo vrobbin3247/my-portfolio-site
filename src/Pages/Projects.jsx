@@ -158,143 +158,139 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen py-6 bg-custom-background font-cascadia">
-      <div className="px-4 sm:px-4 lg:px-4 mx-auto">
-        <div className="mb-8">
-          <div className="md:flex h-[80vh]">
-            {/* Left Navigation (Master View) */}
-            <div
-              className={`
+      <div className="mb-8">
+        <div className="md:flex h-[80vh]">
+          {/* Left Navigation (Master View) */}
+          <div
+            className={`
                 ${isMobileDetailView ? "hidden" : "block"} 
                 md:block md:w-1/3 md:border-r md:border-custom_purple_washed pr-2 overflow-y-auto
               `}
-            >
-              {Object.keys(projectCategories).map((folderName) => (
-                <div key={folderName} className="mb-2">
-                  <div
-                    className="text-custom-gray pl-4 py-2 text-base flex items-center cursor-pointer hover:bg-custom_purple_washed"
-                    onClick={() => toggleFolder(folderName)}
-                  >
-                    <span className="transform inline-block mr-2">
-                      {expandedFolders[folderName] ? <FaMinus /> : <FaPlus />}
-                    </span>
-                    <span className="mr-2">{folderTypes[folderName].icon}</span>
-                    <span>{folderTypes[folderName].name}</span>
-                  </div>
+          >
+            {Object.keys(projectCategories).map((folderName) => (
+              <div key={folderName} className="mb-2">
+                <div
+                  className="text-custom-gray pl-4 py-2 text-base flex items-center cursor-pointer hover:bg-custom_purple_washed"
+                  onClick={() => toggleFolder(folderName)}
+                >
+                  <span className="transform inline-block mr-2">
+                    {expandedFolders[folderName] ? <FaMinus /> : <FaPlus />}
+                  </span>
+                  <span className="mr-2">{folderTypes[folderName].icon}</span>
+                  <span>{folderTypes[folderName].name}</span>
+                </div>
 
-                  {expandedFolders[folderName] && (
-                    <div>
-                      {projectCategories[folderName].map((project) => (
-                        <div
-                          key={project.id}
-                          className={`pl-8 py-2 cursor-pointer text-sm flex items-center ${
-                            selectedProject === project.id
-                              ? "bg-custom_purple_washed text-custom-text"
-                              : "text-custom-gray hover:text-custom-text hover:bg-custom_purple_washed/50"
-                          }`}
-                          onClick={() => setSelectedProject(project.id)}
-                        >
-                          <span className="mr-2">
-                            {project.technologies[0] === "Python" && (
-                              <FaPython className="text-custom-yellow" />
-                            )}
-                            {project.technologies[0] === "React" && (
-                              <FaReact className="text-custom-blue" />
-                            )}
-                          </span>
-                          <div className="flex items-center gap-4 text-custom-text">
-                            <span className="font-bold">{project.title}</span>
+                {expandedFolders[folderName] && (
+                  <div>
+                    {projectCategories[folderName].map((project) => (
+                      <div
+                        key={project.id}
+                        className={`pl-8 py-2 cursor-pointer text-sm flex items-center ${
+                          selectedProject === project.id
+                            ? "bg-custom_purple_washed text-custom-text"
+                            : "text-custom-gray hover:text-custom-text hover:bg-custom_purple_washed/50"
+                        }`}
+                        onClick={() => setSelectedProject(project.id)}
+                      >
+                        <span className="mr-2">
+                          {project.technologies[0] === "Python" && (
+                            <FaPython className="text-custom-yellow" />
+                          )}
+                          {project.technologies[0] === "React" && (
+                            <FaReact className="text-custom-blue" />
+                          )}
+                        </span>
+                        <div className="flex items-center gap-4 text-custom-text">
+                          <span className="font-bold">{project.title}</span>
 
-                            {project.live ? (
-                              <a
-                                href={project.live}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-custom-blue hover:underline"
-                              >
-                                Try
-                              </a>
-                            ) : (
-                              <span className="text-custom-gray cursor-not-allowed">
-                                Try
-                              </span>
-                            )}
-
+                          {project.live ? (
                             <a
-                              href={project.git_repo}
+                              href={project.live}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-custom-green hover:underline"
+                              className="text-custom-blue hover:underline"
                             >
-                              Code
+                              Try
                             </a>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Right Content Area (Detail View) */}
-            <div
-              className={`
-                ${isMobileDetailView ? "block" : "hidden"} 
-                md:block md:w-2/3 pl-4 overflow-y-auto text-custom-text
-              `}
-            >
-              {/* Mobile Back Button */}
-              <div className="md:hidden mb-4">
-                <button
-                  onClick={() => setIsMobileDetailView(false)}
-                  className="flex items-center text-custom-gray hover:text-custom-text"
-                >
-                  <FaArrowLeft className="mr-2" />
-                  <span>Back to Projects</span>
-                </button>
-              </div>
-
-              {selectedProject ? (
-                <div>
-                  {(() => {
-                    const project = Object.values(projectCategories)
-                      .flat()
-                      .find((p) => p.id === selectedProject);
-
-                    if (!project) return null;
-
-                    return (
-                      <div className="mb-6">
-                        <div className="sticky top-0 bg-custom-background pt-2 pb-4 z-10">
-                          {loading ? (
-                            <p>Loading markdown...</p>
-                          ) : error ? (
-                            <p className="text-custom-red">Error: {error}</p>
                           ) : (
-                            <div className="all-unset">
-                              <div className="prose max-w-none">
-                                <MarkdownRenderer content={markdownContent} />
-                              </div>
-                            </div>
+                            <span className="text-custom-gray cursor-not-allowed">
+                              Try
+                            </span>
                           )}
+
+                          <a
+                            href={project.git_repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-custom-green hover:underline"
+                          >
+                            Code
+                          </a>
                         </div>
                       </div>
-                    );
-                  })()}
-                </div>
-              ) : (
-                <div className="h-full hidden md:flex items-center justify-center text-custom-gray">
-                  <div className="text-center">
-                    <p className="text-xl mb-2">
-                      // Select a project from the explorer
-                    </p>
-                    <p>
-                      console.log("Click on a project file to view details")
-                    </p>
+                    ))}
                   </div>
-                </div>
-              )}
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Right Content Area (Detail View) */}
+          <div
+            className={`
+                ${isMobileDetailView ? "block" : "hidden"} 
+                bg-custom-background md:block md:w-2/3 pl-4 overflow-y-auto text-custom-text
+              `}
+          >
+            {/* Mobile Back Button */}
+            <div className="md:hidden mb-4">
+              <button
+                onClick={() => setIsMobileDetailView(false)}
+                className="flex items-center text-custom-gray hover:text-custom-text"
+              >
+                <FaArrowLeft className="mr-2" />
+                <span>Back to Projects</span>
+              </button>
             </div>
+
+            {selectedProject ? (
+              <div>
+                {(() => {
+                  const project = Object.values(projectCategories)
+                    .flat()
+                    .find((p) => p.id === selectedProject);
+
+                  if (!project) return null;
+
+                  return (
+                    <div className="mb-6">
+                      <div className="sticky top-0 bg-custom-background pt-2 pb-4 z-10">
+                        {loading ? (
+                          <p>Loading markdown...</p>
+                        ) : error ? (
+                          <p className="text-custom-red">Error: {error}</p>
+                        ) : (
+                          <div className="all-unset">
+                            <div className="prose max-w-none">
+                              <MarkdownRenderer content={markdownContent} />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            ) : (
+              <div className="h-full hidden md:flex items-center justify-center text-custom-gray">
+                <div className="text-center">
+                  <p className="text-xl mb-2">
+                    // Select a project from the explorer
+                  </p>
+                  <p>console.log("Click on a project file to view details")</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
